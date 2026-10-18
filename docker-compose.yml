@@ -1,0 +1,94 @@
+# Entorno LOCAL de desarrollo del monorepo. Nunca apunta a Supabase ni a bases remotas.
+# - postgres: siempre (npm run db:up)
+# - perfil "app": migrate → api + worker del backend en contenedores (npm run docker:up)
+# La API sirve el build del frontend desde el mismo origen.
+name: blinka-payguard
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: blinka
+      POSTGRES_PASSWORD: blinka_local_dev
+      POSTGRES_DB: blinka_dev
+    ports:
+      # Solo loopback y puerto no estándar para no chocar con otros Postgres locales.
+      - "127.0.0.1:54329:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./docker/postgres/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U blinka -d blinka_dev"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  # Servicios de aplicación opcionales (perfil "app"): una sola imagen
+  # (construida por "migrate") y dos procesos independientes: api y worker.
+  migrate:
+    profiles: ["app"]
+    build:
+      context: .
+      dockerfile: apps/backend/Dockerfile
+    image: blinka-payguard-backend:local
+    command: ["node", "dist/shared/db/migrate.js"]
+    # Secretos LOCALES (ACCOUNT_FINGERPRINT_SECRET…) desde el .env ignorado por Git;
+    # las claves de `environment` prevalecen sobre las del archivo.
+    env_file:
+      - path: apps/backend/.env
+        required: false
+    environment: &app-env
+      NODE_ENV: production
+      LOG_FORMAT: json
+      LOG_LEVEL: info
+      # Base LOCAL del contenedor postgres; BLINKA_DB permite usar otra base local (por defecto blinka_dev).
+      DATABASE_URL: postgres://blinka:blinka_local_dev@postgres:5432/${BLINKA_DB:-blinka_dev}
+      # Producción exige https: origen ficticio de ejemplo para el futuro frontend.
+      ALLOWED_ORIGINS: https://app.blinka.localhost
+      STORAGE_DRIVER: local
+      STORAGE_LOCAL_DIR: /data/storage
+      # Demo LOCAL: proveedor de IA FAKE (MOCK) y tasas FX FIXTURE, declarados explícitamente.
+      AI_PROVIDER: fake
+      AI_ALLOW_FAKE: "true"
+      FX_PROVIDER: fixture
+      FX_ALLOW_SIMULATED: "true"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  api:
+    profiles: ["app"]
+    image: blinka-payguard-backend:local
+    pull_policy: never
+    command: ["node", "dist/server.js"]
+    env_file:
+      - path: apps/backend/.env
+        required: false
+    environment:
+      <<: *app-env
+      PORT: "4000"
+    volumes:
+      - ./apps/backend/.storage:/data/storage
+    ports:
+      - "127.0.0.1:4000:4000"
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+
+  worker:
+    profiles: ["app"]
+    image: blinka-payguard-backend:local
+    pull_policy: never
+    command: ["node", "dist/worker.js"]
+    env_file:
+      - path: apps/backend/.env
+        required: false
+    environment: *app-env
+    volumes:
+      - ./apps/backend/.storage:/data/storage
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+
+volumes:
+  pgdata:

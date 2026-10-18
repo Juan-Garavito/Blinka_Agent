@@ -1,0 +1,27 @@
+# Contexto = raíz del monorepo. Backend y build del frontend.
+**/node_modules
+**/dist
+**/coverage
+**/.env
+**/.env.*
+!**/.env.example
+!**/.env.*.example
+**/*.log
+.git
+docs
+apps/*/test
+apps/*/e2e
+.playwright-results
+playwright-report
+
+supabase/.temp
+supabase/.branches
+.supabase
+**/*.key
+**/*.p12
+**/*.pfx
+
+*.pem
+.pgpass
+.netrc
+.npmrc

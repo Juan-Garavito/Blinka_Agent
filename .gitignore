@@ -1,0 +1,40 @@
+node_modules/
+dist/
+coverage/
+*.log
+.env
+.env.*
+!.env.example
+!.env.*.example
+.DS_Store
+
+# Registro local de operaciones de aprovisionamiento (migrate/seed)
+.ops-audit/
+
+# Almacenamiento local de documentos privados (desarrollo)
+.storage/
+
+# Artefactos temporales de Playwright (capturas seleccionadas en docs/implementation/evidence)
+.playwright-results/
+playwright-report/
+
+# Estado y credenciales locales de Supabase CLI
+supabase/.temp/
+supabase/.branches/
+.supabase/
+**/access-token
+*.key
+*.p12
+*.pfx
+
+*.pem
+.pgpass
+.netrc
+.npmrc
+
+# Certificados locales (CA de Supabase u otros): no se versionan
+*.crt
+.certs/
+
+# Capturas de evidencia: se conservan en local, no se versionan
+docs/implementation/evidence/**/*.png

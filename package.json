@@ -1,0 +1,46 @@
+{
+  "name": "blinka-payguard",
+  "private": true,
+  "description": "Blinka PayGuard AI — monorepo (backend + frontend)",
+  "engines": {
+    "node": ">=24.7.0"
+  },
+  "workspaces": [
+    "apps/backend",
+    "apps/web"
+  ],
+  "scripts": {
+    "dev:api": "npm run dev -w @blinka/backend",
+    "dev:worker": "npm run dev:worker -w @blinka/backend",
+    "build": "npm run build --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "db:up": "docker compose up -d --wait postgres",
+    "db:down": "docker compose stop postgres",
+    "db:generate": "npm run db:generate -w @blinka/backend",
+    "db:migrate": "npm run db:migrate -w @blinka/backend",
+    "db:migrate:test": "npm run db:migrate:test -w @blinka/backend",
+    "docker:build": "docker compose --profile app build",
+    "docker:up": "docker compose --profile app up -d --build --wait",
+    "docker:down": "docker compose --profile app down",
+    "db:seed": "npm run db:seed -w @blinka/backend",
+    "openapi:export": "npm run openapi:export -w @blinka/backend",
+    "db:seed:demo": "npm run db:seed:demo -w @blinka/backend",
+    "demo:run": "npm run demo:run -w @blinka/backend",
+    "test:external": "npm run test:external -w @blinka/backend",
+    "dev:web": "npm run dev -w @blinka/web",
+    "e2e": "npm run e2e -w @blinka/web",
+    "supabase": "supabase",
+    "integration:preflight": "npm run integration:preflight -w @blinka/backend --",
+    "gemini:models": "npm run gemini:models -w @blinka/backend",
+    "gemini:smoke": "npm run gemini:smoke -w @blinka/backend",
+    "security:public": "node scripts/audit-public.mjs",
+    "storage:prepare": "npm run storage:prepare -w @blinka/backend --",
+    "db:prepare:supabase": "npm run db:prepare:supabase -w @blinka/backend --",
+    "verify:mock": "node scripts/verify-mock.mjs"
+  },
+  "devDependencies": {
+    "supabase": "2.121.0"
+  }
+}
