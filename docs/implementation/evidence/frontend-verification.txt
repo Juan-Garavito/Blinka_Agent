@@ -1,0 +1,146 @@
+Blinka frontend FE5 — verificación local 18-10-2026
+No commit, push, despliegue, Gemini real, Supabase ni bases remotas.
+
+Comandos ejecutados y resultados:
+- npm run typecheck: PASS (backend TypeScript).
+- npm test -w @blinka/web: PASS, 4 archivos, 14/14 (salida observada 10:09:49).
+- npm ls --depth=0: PASS, sin dependencias inválidas; sin auditoría externa nueva.
+
+Lint (exit 0):
+
+> lint
+> npm run lint --workspaces --if-present
+
+
+> @blinka/backend@0.1.0 lint
+> eslint .
+
+
+> @blinka/web@0.1.0 lint
+> eslint .
+
+
+Build (exit 0):
+
+> build
+> npm run build --workspaces --if-present
+
+
+> @blinka/backend@0.1.0 build
+> tsc -p tsconfig.build.json
+
+
+> @blinka/web@0.1.0 build
+> vite build
+
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 149 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                              0.56 kB │ gzip:   0.33 kB
+dist/assets/manrope-vietnamese-wght-normal-usUDDRr7.woff2    8.52 kB
+dist/assets/manrope-greek-wght-normal-DL7QRZyv.woff2         9.44 kB
+dist/assets/inter-vietnamese-wght-normal-CBcvBZtf.woff2     10.25 kB
+dist/assets/inter-greek-ext-wght-normal-DlzME5K_.woff2      11.23 kB
+dist/assets/manrope-cyrillic-wght-normal-Dvxsihut.woff2     14.50 kB
+dist/assets/manrope-latin-ext-wght-normal-Ch3YOpNY.woff2    15.12 kB
+dist/assets/inter-cyrillic-wght-normal-DqGufNeO.woff2       18.74 kB
+dist/assets/inter-greek-wght-normal-CkhJZR-_.woff2          18.99 kB
+dist/assets/manrope-latin-wght-normal-DHIcAJRg.woff2        24.83 kB
+dist/assets/inter-cyrillic-ext-wght-normal-BOeWTOD4.woff2   25.96 kB
+dist/assets/inter-latin-wght-normal-Dx4kXJAl.woff2          48.25 kB
+dist/assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2      85.06 kB
+dist/assets/StyleGuide-QUVc3G8M.css                          1.01 kB │ gzip:   0.44 kB
+dist/assets/StatusBadge-CHGHJxBs.css                         1.49 kB │ gzip:   0.51 kB
+dist/assets/Budgets-D_WHk_ve.css                             1.61 kB │ gzip:   0.62 kB
+dist/assets/Audit-Bh2Cbzme.css                               1.62 kB │ gzip:   0.71 kB
+dist/assets/InvoiceList-D9fLMR6B.css                         1.89 kB │ gzip:   0.72 kB
+dist/assets/VersionEditor-CxU35RVg.css                       2.21 kB │ gzip:   0.82 kB
+dist/assets/manage-BCTB5QQs.css                              2.84 kB │ gzip:   0.94 kB
+dist/assets/Approvals-BsiSEIQU.css                           3.57 kB │ gzip:   1.11 kB
+dist/assets/Dashboard-DY8mAKj4.css                           4.73 kB │ gzip:   1.39 kB
+dist/assets/InvoiceNew-BOMIOkn2.css                          5.25 kB │ gzip:   1.49 kB
+dist/assets/RunProgress-BuNFTqC-.css                        13.79 kB │ gzip:   3.28 kB
+dist/assets/index-PdOIjkNQ.css                              26.03 kB │ gzip:   8.59 kB
+dist/assets/StatusBadge.module-DBncJV6h.js                   0.37 kB │ gzip:   0.24 kB │ map:     1.86 kB
+dist/assets/Money-CIPYKj0z.js                                0.43 kB │ gzip:   0.31 kB │ map:     1.14 kB
+dist/assets/manage.module-CHvdTPnv.js                        0.50 kB │ gzip:   0.28 kB │ map:     3.22 kB
+dist/assets/VendorStatus-CjVk-6OV.js                         0.99 kB │ gzip:   0.63 kB │ map:     2.27 kB
+dist/assets/format-BtSmaMbW.js                               2.23 kB │ gzip:   1.02 kB │ map:     8.20 kB
+dist/assets/StatusBadge-BSY0N2GD.js                          2.26 kB │ gzip:   1.08 kB │ map:     4.96 kB
+dist/assets/ContractList-Cp99VbrX.js                         2.87 kB │ gzip:   1.16 kB │ map:     7.88 kB
+dist/assets/ContractNew-CNgM6G0b.js                          4.33 kB │ gzip:   1.85 kB │ map:    11.63 kB
+dist/assets/rules-HnD86S8z.js                                4.82 kB │ gzip:   2.26 kB │ map:     9.19 kB
+dist/assets/VendorList-4dacntuY.js                           4.98 kB │ gzip:   2.16 kB │ map:    13.57 kB
+dist/assets/Settings-CpajJ8jI.js                             5.47 kB │ gzip:   2.30 kB │ map:    15.29 kB
+dist/assets/VersionEditor-DM6H8OI8.js                        5.76 kB │ gzip:   2.20 kB │ map:    16.03 kB
+dist/assets/ContractDetail-D10CTLyQ.js                       6.12 kB │ gzip:   2.52 kB │ map:    17.62 kB
+dist/assets/StyleGuide-BRitRRzb.js                           6.34 kB │ gzip:   2.51 kB │ map:    15.76 kB
+dist/assets/InvoiceList-B9GlVU2F.js                          6.76 kB │ gzip:   2.55 kB │ map:    21.37 kB
+dist/assets/Audit-i7d3JfZ-.js                                7.25 kB │ gzip:   2.67 kB │ map:    20.54 kB
+dist/assets/Budgets-B0Eq72Cn.js                              7.69 kB │ gzip:   3.04 kB │ map:    21.79 kB
+dist/assets/Approvals-CsMD9iAN.js                            8.08 kB │ gzip:   3.13 kB │ map:    23.22 kB
+dist/assets/VendorDetail-CXI0nzjo.js                         8.33 kB │ gzip:   2.98 kB │ map:    22.41 kB
+dist/assets/Dashboard-CdH4xZWz.js                           10.39 kB │ gzip:   3.58 kB │ map:    31.14 kB
+dist/assets/InvoiceNew-0G9fiCPb.js                          11.22 kB │ gzip:   4.44 kB │ map:    34.51 kB
+dist/assets/Policies-BAu5GNRT.js                            12.34 kB │ gzip:   4.23 kB │ map:    34.07 kB
+dist/assets/InvoiceDetail-CL46vCSm.js                       38.37 kB │ gzip:  12.15 kB │ map:   105.69 kB
+dist/assets/RunProgress-BTsMwUVv.js                         75.08 kB │ gzip:  29.57 kB │ map:   393.35 kB
+dist/assets/index-C0gLBu_M.js                              348.98 kB │ gzip: 110.76 kB │ map: 1,655.76 kB
+
+✓ built in 572ms
+
+Backend (exit 0):
+
+> @blinka/backend@0.1.0 test
+> vitest run
+
+
+ RUN  v5.0.5 /home/juanyi/Projects/Blinka_Agent/apps/backend
+
+
+ Test Files  30 passed (30)
+      Tests  244 passed (244)
+   Start at  10:11:38
+   Duration  79.39s (tests 81%, import 18%)
+
+
+E2E FINAL (exit 0):
+E2E_BASE_URL=http://localhost:4001 PW_CHROME=/usr/bin/google-chrome-stable npm run e2e -w @blinka/web -- --output=/tmp/blinka-fe5-complete
+Frontend Vite compilado servido por Express (NODE_ENV=development, cookies HTTP locales).
+API/worker/PostgreSQL locales reales; AI FAKE (MOCK), FX FIXTURE; pagos/reservas simulados.
+
+> @blinka/web@0.1.0 e2e
+> playwright test --output=/tmp/blinka-fe5-complete
+
+
+Running 9 tests using 1 worker
+
+(node:1430166) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [desktop] › e2e/hardening.spec.js:15:1 › aprobación simulada exige motivo y muestra reevaluación (4.2s)
+  ✓  2 [desktop] › e2e/hardening.spec.js:34:1 › imagen sin texto: confirmar campos y reanalizar (4.8s)
+  ✓  3 [desktop] › e2e/hardening.spec.js:58:1 › páginas principales sin desbordamiento ni errores @mobile (6.0s)
+  ✓  4 [desktop] › e2e/journey.spec.js:7:3 › Recorrido prioritario: Dashboard → Nueva factura → proveedor → carga → análisis → decisión y evidencias › factura por horas conforme queda AUTORIZADA con evidencia verificada en el texto @mobile (4.7s)
+  ✓  5 [desktop] › e2e/journey.spec.js:60:3 › Recorrido prioritario: Dashboard → Nueva factura → proveedor → carga → análisis → decisión y evidencias › discrepancia con el documento → EN CORRECCIÓN, sin opción de aprobar @mobile (2.3s)
+(node:1431610) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  6 [tablet] › e2e/hardening.spec.js:58:1 › páginas principales sin desbordamiento ni errores @mobile (6.3s)
+(node:1432031) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  7 [mobile] › e2e/hardening.spec.js:58:1 › páginas principales sin desbordamiento ni errores @mobile (8.1s)
+  ✓  8 [mobile] › e2e/journey.spec.js:7:3 › Recorrido prioritario: Dashboard → Nueva factura → proveedor → carga → análisis → decisión y evidencias › factura por horas conforme queda AUTORIZADA con evidencia verificada en el texto @mobile (4.2s)
+  ✓  9 [mobile] › e2e/journey.spec.js:60:3 › Recorrido prioritario: Dashboard → Nueva factura → proveedor → carga → análisis → decisión y evidencias › discrepancia con el documento → EN CORRECCIÓN, sin opción de aprobar @mobile (2.3s)
+
+  9 passed (44.8s)
+
+Alcance/limitaciones:
+- 38 capturas PNG desktop/tablet/mobile en evidence/frontend/.
+- Errores de consola y pageerror comprobados tras autenticación en diez páginas.
+- Intentos previos alcanzaron el rate limit por IP; se esperó a su expiración.
+  No se modificaron límites ni contadores. Sesión reutilizada solo en memoria.
+- Pruebas fallidas previas no se contabilizan como cierre exitoso.
+- Docker/Railway preparados, imagen nueva no construida y despliegue no ejecutado.
+- Seed O anterior conserva PNG inválido; confirmación E2E usa PNG válido.
+- Configuración de empresa de solo lectura; falta endpoint de edición.
