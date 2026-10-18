@@ -1,0 +1,22 @@
+.editor { display: grid; gap: var(--s-5); }
+.items { border: var(--hairline); border-radius: var(--radius); padding: var(--s-4); margin: 0; display: grid; gap: var(--s-3); }
+.items legend { padding: 0 6px; font-weight: 650; }
+.itemRow { display: grid; grid-template-columns: repeat(var(--cols), minmax(0, 1fr)) auto; gap: 8px; align-items: end; padding-bottom: var(--s-3); border-bottom: var(--hairline); }
+.remove { width: 40px; height: 42px; border: 0; background: none; border-radius: var(--radius); color: var(--muted); cursor: pointer; display: grid; place-items: center; }
+.remove:hover { background: var(--tint); color: var(--ink); }
+.err { color: var(--st-blocked); font-size: var(--fs-sm); font-weight: 550; }
+.types { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; border: 0; padding: 0; margin: 0; }
+.types legend { font-weight: 650; font-size: var(--fs-sm); margin-bottom: 8px; }
+.types label { display: grid; gap: 4px; padding: 12px 14px; border: 1px solid var(--line-strong); border-radius: var(--radius); background: var(--paper); cursor: pointer; }
+.types label[data-checked] { border-color: var(--brand-petrol); box-shadow: inset 3px 0 0 var(--brand-petrol); }
+.types input { position: absolute; opacity: 0; pointer-events: none; }
+.types label:focus-within { box-shadow: var(--focus-ring); }
+.types .muted { font-size: var(--fs-xs); }
+.version { border: var(--hairline); border-radius: var(--radius); background: var(--paper); }
+.versionHead { display: flex; justify-content: space-between; align-items: center; gap: var(--s-3); padding: var(--s-4) var(--s-5); border-bottom: var(--hairline); flex-wrap: wrap; }
+.versionBody { padding: var(--s-4) var(--s-5); display: grid; gap: var(--s-4); }
+.vStatus { font-size: var(--fs-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; padding: 2px 8px; border-radius: 4px; }
+.vStatus[data-s="CONFIRMED"] { background: var(--st-authorized-bg); color: var(--st-authorized); }
+.vStatus[data-s="DRAFT"] { background: var(--st-approval-bg); color: var(--st-approval); }
+.vStatus[data-s="REJECTED"] { background: var(--st-rejected-bg); color: var(--st-rejected); }
+@media (max-width: 900px) { .itemRow { grid-template-columns: 1fr 1fr; } }
