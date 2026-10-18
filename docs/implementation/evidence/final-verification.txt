@@ -1,0 +1,50 @@
+# Verificación final — 2026-10-18T07:05:15-05:00 — Node v26.8.2, npm 11.19.1
+## npm ci
+added 356 packages, and audited 358 packages in 2s
+4 moderate severity vulnerabilities
+## lint
+OK
+## typecheck
+OK
+## build
+OK
+## db:migrate:test
+"msg":"Destino de aprovisionamiento"
+"msg":"Migraciones de aplicación (Drizzle) al día"
+"msg":"Esquema de Graphile Worker al día"
+## test
+Test Files  24 passed (24)
+Tests  199 passed (199)
+Duration  52.08s (tests 82%, import 17%, transform 1%)
+segundos=52
+## npm audit --omit=dev
+found 0 vulnerabilities
+## npm audit (todas)
+Severity: moderate
+4 moderate severity vulnerabilities
+## desglose por archivo (reporter json)
+total=199 passed=199 failed=0 suites=64
+test/integration/analysis.test.ts: 8/8
+test/integration/approvals.test.ts: 10/10
+test/integration/auth.test.ts: 20/20
+test/integration/commercial.test.ts: 24/24
+test/integration/company-context.test.ts: 7/7
+test/integration/contract-and-secrets.test.ts: 3/3
+test/integration/database.test.ts: 5/5
+test/integration/demo-e2e.test.ts: 1/1
+test/integration/financial.test.ts: 16/16
+test/integration/identity-schema.test.ts: 6/6
+test/integration/processes.test.ts: 4/4
+test/integration/provisioning.test.ts: 3/3
+test/integration/worker.test.ts: 2/2
+test/unit/app.test.ts: 11/11
+test/unit/db-target.test.ts: 7/7
+test/unit/decision-engine.test.ts: 24/24
+test/unit/documents.test.ts: 6/6
+test/unit/enqueue.test.ts: 3/3
+test/unit/env-security.test.ts: 8/8
+test/unit/env.test.ts: 7/7
+test/unit/fx.test.ts: 4/4
+test/unit/harness.test.ts: 11/11
+test/unit/jobs-limits.test.ts: 3/3
+test/unit/password.test.ts: 6/6

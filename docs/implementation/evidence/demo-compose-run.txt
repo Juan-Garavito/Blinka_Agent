@@ -1,0 +1,39 @@
+# Demo local en Docker Compose (api + worker en contenedores, Graphile real, IA FAKE (MOCK), FX FIXTURE simulada)
+# Fecha: 2026-10-18T07:04:04-05:00 · comando: npm run docker:up && npm run db:seed:demo && npm run demo:run
+┌─────────┬───────────────────────────────────┬─────────────────┬──────────────────────┬──────────────┬───────────────────────────────────────────────────────────────────────────────┬───────┐
+│ (index) │ vendor                            │ outcome         │ reason               │ amountBase   │ stages                                                                        │ ms    │
+├─────────┼───────────────────────────────────┼─────────────────┼──────────────────────┼──────────────┼───────────────────────────────────────────────────────────────────────────────┼───────┤
+│ 0       │ 'Alfa Software SAS (FICTICIO)'    │ 'AUTORIZADA'    │ 'ALL_CHECKS_PASSED'  │ '1200.0000'  │ 'EXTRACT:SUCCEEDED CONTRACT:SUCCEEDED CONTRACT:SUCCEEDED FINANCIAL:SUCCEEDED' │ '526' │
+│ 1       │ 'Alfa Software SAS (FICTICIO)'    │ 'BLOQUEADA'     │ 'HARD_INVOICE_CAP'   │ '25000.0000' │ 'EXTRACT:SUCCEEDED CONTRACT:SUCCEEDED CONTRACT:SUCCEEDED FINANCIAL:SUCCEEDED' │ '261' │
+│ 2       │ 'Beta Consultores (FICTICIO)'     │ 'EN_APROBACION' │ 'APPROVAL_REQUIRED'  │ '6000.0000'  │ 'EXTRACT:SUCCEEDED CONTRACT:SUCCEEDED CONTRACT:SUCCEEDED FINANCIAL:SUCCEEDED' │ '259' │
+│ 3       │ 'Alfa Software SAS (FICTICIO)'    │ 'BLOQUEADA'     │ 'DUPLICATE_INVOICE'  │ '1200.0000'  │ 'EXTRACT:SUCCEEDED CONTRACT:SUCCEEDED CONTRACT:SUCCEEDED FINANCIAL:SUCCEEDED' │ '263' │
+│ 4       │ 'Gamma Bloqueada Ltda (FICTICIO)' │ 'BLOQUEADA'     │ 'VENDOR_STATUS'      │ '300.0000'   │ 'EXTRACT:SUCCEEDED CONTRACT:SUCCEEDED CONTRACT:SUCCEEDED FINANCIAL:SUCCEEDED' │ '257' │
+│ 5       │ 'Delta Nueva SAS (FICTICIO)'      │ 'EN_APROBACION' │ 'VENDOR_STATUS'      │ '300.0000'   │ 'EXTRACT:SUCCEEDED CONTRACT:SUCCEEDED CONTRACT:SUCCEEDED FINANCIAL:SUCCEEDED' │ '261' │
+│ 6       │ 'Alfa Software SAS (FICTICIO)'    │ 'EN_CORRECCION' │ 'HOURLY_RATE'        │ '1600.0000'  │ 'EXTRACT:SUCCEEDED CONTRACT:SUCCEEDED CONTRACT:SUCCEEDED FINANCIAL:SUCCEEDED' │ '262' │
+│ 7       │ 'Épsilon Sin Contrato (FICTICIO)' │ 'EN_CORRECCION' │ 'CONTRACT_FOUND'     │ '300.0000'   │ 'EXTRACT:SUCCEEDED CONTRACT:SUCCEEDED CONTRACT:SUCCEEDED FINANCIAL:SUCCEEDED' │ '261' │
+│ 8       │ 'Zeta Marketing (FICTICIO)'       │ 'BLOQUEADA'     │ 'BUDGET_CATEGORY'    │ '1200.0000'  │ 'EXTRACT:SUCCEEDED CONTRACT:SUCCEEDED CONTRACT:SUCCEEDED FINANCIAL:SUCCEEDED' │ '263' │
+│ 9       │ 'Eta Europa GmbH (FICTICIO)'      │ 'AUTORIZADA'    │ 'ALL_CHECKS_PASSED'  │ '1085.0000'  │ 'EXTRACT:SUCCEEDED CONTRACT:SUCCEEDED CONTRACT:SUCCEEDED FINANCIAL:SUCCEEDED' │ '260' │
+│ 10      │ 'Theta Colombia SAS (FICTICIO)'   │ 'AUTORIZADA'    │ 'ALL_CHECKS_PASSED'  │ '960.0000'   │ 'EXTRACT:SUCCEEDED CONTRACT:SUCCEEDED CONTRACT:SUCCEEDED FINANCIAL:SUCCEEDED' │ '260' │
+│ 11      │ 'Iota UK Ltd (FICTICIO)'          │ 'ERROR'         │ 'FX_RATE'            │ null         │ 'EXTRACT:SUCCEEDED CONTRACT:SUCCEEDED CONTRACT:SUCCEEDED FINANCIAL:SUCCEEDED' │ '261' │
+│ 12      │ 'Alfa Software SAS (FICTICIO)'    │ 'EN_CORRECCION' │ 'EXTRACTION_QUALITY' │ null         │ 'EXTRACT:SUCCEEDED FINANCIAL:SUCCEEDED'                                       │ '261' │
+└─────────┴───────────────────────────────────┴─────────────────┴──────────────────────┴──────────────┴───────────────────────────────────────────────────────────────────────────────┴───────┘
+{
+  "invoicesByStatus": {
+    "AUTORIZADA": 3,
+    "BLOQUEADA": 4,
+    "EN_APROBACION": 2,
+    "EN_CORRECCION": 3,
+    "ERROR": 1
+  },
+  "pendingApprovals": 1,
+  "aiUsage": [
+    {
+      "provider": "FAKE (MOCK)",
+      "isSimulated": true,
+      "calls": 13,
+      "inputTokens": 15600,
+      "outputTokens": 3900,
+      "estimatedCostUsd": "0.00000000"
+    }
+  ]
+}
