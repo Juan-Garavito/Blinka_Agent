@@ -1,0 +1,2 @@
+ALTER TABLE "auth_sessions" DROP CONSTRAINT "auth_sessions_revocation_consistent";--> statement-breakpoint
+ALTER TABLE "auth_sessions" ADD CONSTRAINT "auth_sessions_revocation_consistent" CHECK (("auth_sessions"."revoked_at" is null and "auth_sessions"."revoked_reason" is null) or ("auth_sessions"."revoked_at" is not null and coalesce("auth_sessions"."revoked_reason" in ('LOGOUT', 'REGENERATED'), false)));

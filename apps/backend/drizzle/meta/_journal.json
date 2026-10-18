@@ -1,0 +1,125 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1792304389885,
+      "tag": "0000_identity",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1792304411640,
+      "tag": "0001_companies_timezone_check",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1792304602493,
+      "tag": "0002_rate_limit_buckets",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1792304918319,
+      "tag": "0003_fix_session_revocation_check",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1792305407898,
+      "tag": "0004_commercial_domain",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1792305439127,
+      "tag": "0005_commercial_integrity",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1792306327921,
+      "tag": "0006_financial_engine",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1792306378913,
+      "tag": "0007_financial_integrity",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1792307325063,
+      "tag": "0008_agents_processing",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1792307325673,
+      "tag": "0009_agents_integrity",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1792307410723,
+      "tag": "0010_run_version_while_running",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1792308187332,
+      "tag": "0011_approvals",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1792308187909,
+      "tag": "0012_approvals_integrity",
+      "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1792328044609,
+      "tag": "0013_contract_hour_consumptions",
+      "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "7",
+      "when": 1792328045196,
+      "tag": "0014_hour_consumptions_integrity",
+      "breakpoints": true
+    },
+    {
+      "idx": 15,
+      "version": "7",
+      "when": 1792328399543,
+      "tag": "0015_evidence_verification",
+      "breakpoints": true
+    },
+    {
+      "idx": 16,
+      "version": "7",
+      "when": 1792328400160,
+      "tag": "0016_evidence_integrity",
+      "breakpoints": true
+    }
+  ]
+}
