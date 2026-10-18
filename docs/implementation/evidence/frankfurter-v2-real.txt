@@ -1,0 +1,17 @@
+# Frankfurter — peticiones GET REALES sin credenciales
+# Fecha de consulta: 2026-10-18T07:51:36-05:00 (domingo). Fuente: https://api.frankfurter.dev (docs https://frankfurter.dev)
+GET /v1/latest?base=USD&symbols=COP → {"message":"not found"}  [HTTP 404]
+GET /v2/rate/USD/COP → {"date":"2026-10-18","base":"USD","quote":"COP","rate":3170.55}  [HTTP 200]
+GET /v2/rate/COP/USD → {"date":"2026-10-18","base":"COP","quote":"USD","rate":0.00032}  [HTTP 200]
+GET /v2/rate/EUR/USD → {"date":"2026-10-18","base":"EUR","quote":"USD","rate":1.1231}  [HTTP 200]
+GET /v2/providers/BANREP/rate/USD/COP → {"date":"2026-10-16","base":"USD","quote":"COP","rate":3170.46}  [HTTP 200]
+GET /v2/providers/BANREP/rate/COP/USD → {"date":"2026-10-16","base":"COP","quote":"USD","rate":0.00032}  [HTTP 200]
+GET /v2/providers/ECB/rate/EUR/USD → {"date":"2026-10-16","base":"EUR","quote":"USD","rate":1.1253}  [HTTP 200]
+GET /v2/providers/ECB/rate/USD/EUR → {"date":"2026-10-16","base":"USD","quote":"EUR","rate":0.88865}  [HTTP 200]
+
+# Proveedor BANREP (metadatos /v2/providers):
+{'key': 'BANREP', 'name': 'Banco de la República', 'rate_type': 'representative market', 'pivot_currency': 'COP', 'publish_cadence': 'daily', 'end_date': '2026-10-16', 'data_url': 'https://www.datos.gov.co/Econom-a-y-Finanzas/Tasa-de-Cambio-Representativa-del-Mercado-TRM/32sa-8pi3/about_data'}
+{'key': 'ECB', 'name': 'European Central Bank', 'rate_type': 'reference rate', 'pivot_currency': 'EUR', 'publish_cadence': 'daily', 'end_date': '2026-10-16', 'data_url': 'https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html'}
+
+# Observaciones: v1 no cubre COP (404). v2/rate combina proveedores (fecha 2026-10-18, no oficial). COP→USD se publica con 5 decimales (0.00032) ⇒ pérdida de precisión ~1.5%; se deriva por inversión decimal exacta de USD→COP del mismo proveedor.
+      Tests  3 passed (3)

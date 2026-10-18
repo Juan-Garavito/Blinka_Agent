@@ -1,0 +1,50 @@
+# P0-HARDENING — verificación final 2026-10-18T08:21:49-05:00 — Node v26.8.2, npm 11.19.1
+## npm ci
+added 357 packages, and audited 359 packages in 2s
+4 moderate severity vulnerabilities
+## lint
+OK
+## typecheck
+OK
+## build
+OK
+## db:migrate:test
+"msg":"Migraciones de aplicación (Drizzle) al día"
+## npm test
+total=234 passed=234 failed=0 archivos=28 (sin pruebas de red)
+  test/integration/analysis.test.ts: 8/8
+  test/integration/approvals.test.ts: 10/10
+  test/integration/auth.test.ts: 20/20
+  test/integration/commercial.test.ts: 24/24
+  test/integration/company-context.test.ts: 7/7
+  test/integration/contract-and-secrets.test.ts: 3/3
+  test/integration/database.test.ts: 5/5
+  test/integration/demo-e2e.test.ts: 1/1
+  test/integration/evidence.test.ts: 5/5
+  test/integration/financial.test.ts: 16/16
+  test/integration/hour-cap.test.ts: 5/5
+  test/integration/identity-schema.test.ts: 6/6
+  test/integration/processes.test.ts: 4/4
+  test/integration/provisioning.test.ts: 3/3
+  test/integration/recovery.test.ts: 6/6
+  test/integration/worker.test.ts: 2/2
+  test/unit/app.test.ts: 11/11
+  test/unit/db-target.test.ts: 7/7
+  test/unit/decision-engine.test.ts: 29/29
+  test/unit/documents.test.ts: 6/6
+  test/unit/enqueue.test.ts: 3/3
+  test/unit/env-security.test.ts: 8/8
+  test/unit/env.test.ts: 7/7
+  test/unit/evidence-verifier.test.ts: 10/10
+  test/unit/fx.test.ts: 8/8
+  test/unit/harness.test.ts: 11/11
+  test/unit/jobs-limits.test.ts: 3/3
+  test/unit/password.test.ts: 6/6
+# Corrección: una primera medición incluía por error test/external (red) en npm test; se excluyó en vitest.config.ts.
+## npm run test:external (red real: Frankfurter v2)
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+## npm audit --omit=dev
+found 0 vulnerabilities
+## npm audit (todas)
+  npm audit fix --force
