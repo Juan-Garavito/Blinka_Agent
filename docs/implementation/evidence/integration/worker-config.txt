@@ -1,0 +1,5 @@
+
+> @blinka/backend@0.1.0 start:gemini-worker
+> node --env-file-if-exists=.env --env-file-if-exists=.env.gemini dist/worker.js --check-config
+
+{"entrypoint":"worker","provider":"gemini","model":"gemini-3.8-flash","geminiKeyPresent":true,"storage":"local","remoteWrites":false,"geminiRequests":0}

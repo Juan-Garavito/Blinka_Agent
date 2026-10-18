@@ -1,0 +1,88 @@
+P0-INTEGRATION-GEMINI-SUPABASE — 18-10-2026
+Estado externo: BLOCKED, no integración finalizada.
+Sin commit/push/deploy ni escrituras remotas.
+
+
+Typecheck (exit 0):
+
+> typecheck
+> npm run typecheck --workspaces --if-present
+
+
+> @blinka/backend@0.1.0 typecheck
+> tsc -p tsconfig.json --noEmit
+
+
+Lint (exit 0):
+
+> lint
+> npm run lint --workspaces --if-present
+
+
+> @blinka/backend@0.1.0 lint
+> eslint .
+
+
+> @blinka/web@0.1.0 lint
+> eslint .
+
+
+Backend offline (exit 0):
+
+> @blinka/backend@0.1.0 test
+> vitest run
+
+
+ RUN  v5.0.5 /home/juanyi/Projects/Blinka_Agent/apps/backend
+
+
+ Test Files  31 passed (31)
+      Tests  259 passed (259)
+   Start at  11:12:54
+   Duration  74.85s (tests 81%, import 18%)
+
+
+Frontend (exit 0):
+
+> @blinka/web@0.1.0 test
+> vitest run
+
+
+ RUN  v5.0.5 /home/juanyi/Projects/Blinka_Agent/apps/web
+
+
+ Test Files  4 passed (4)
+      Tests  14 passed (14)
+   Start at  11:03:51
+   Duration  2.09s (environment 67%, transform 13%, setup 9%, import 7%, tests 2%, worker 1%)
+
+
+Build (exit 0):
+> build
+> npm run build --workspaces --if-present
+> @blinka/backend@0.1.0 build
+> tsc -p tsconfig.build.json
+> @blinka/web@0.1.0 build
+> vite build
+✓ 149 modules transformed.
+✓ built in 449ms
+
+E2E MOCK (exit 0), npm run verify:mock:
+  ✓  1 [desktop] › e2e/hardening.spec.js:15:1 › aprobación simulada exige motivo y muestra reevaluación (6.2s)
+  ✓  2 [desktop] › e2e/hardening.spec.js:36:1 › imagen sin texto: confirmar campos y reanalizar (6.7s)
+  ✓  3 [desktop] › e2e/hardening.spec.js:60:1 › páginas principales sin desbordamiento ni errores @mobile (5.5s)
+  ✓  4 [desktop] › e2e/journey.spec.js:7:3 › Recorrido prioritario: Dashboard → Nueva factura → proveedor → carga → análisis → decisión y evidencias › factura por horas conforme queda AUTORIZADA con evidencia verificada en el texto @mobile (5.5s)
+  ✓  5 [desktop] › e2e/journey.spec.js:60:3 › Recorrido prioritario: Dashboard → Nueva factura → proveedor → carga → análisis → decisión y evidencias › discrepancia con el documento → EN CORRECCIÓN, sin opción de aprobar @mobile (3.9s)
+  ✓  6 [tablet] › e2e/hardening.spec.js:60:1 › páginas principales sin desbordamiento ni errores @mobile (5.5s)
+  ✓  7 [mobile] › e2e/hardening.spec.js:60:1 › páginas principales sin desbordamiento ni errores @mobile (5.9s)
+  ✓  8 [mobile] › e2e/journey.spec.js:7:3 › Recorrido prioritario: Dashboard → Nueva factura → proveedor → carga → análisis → decisión y evidencias › factura por horas conforme queda AUTORIZADA con evidencia verificada en el texto @mobile (5.3s)
+  ✓  9 [mobile] › e2e/journey.spec.js:60:3 › Recorrido prioritario: Dashboard → Nueva factura → proveedor → carga → análisis → decisión y evidencias › discrepancia con el documento → EN CORRECCIÓN, sin opción de aprobar @mobile (3.8s)
+  9 passed (50.3s)
+{"status":"MOCK_E2E_VERIFIED","database":"blinka_mock_dd5d9784_test","host":"127.0.0.1","ai":"FAKE (MOCK)","fx":"FIXTURE","interfaceScreenshots":false,"browserExternalRequests":"blocked","note":"Base local aislada conservada; sin cambios en blinka_dev ni credenciales de blinka_test"}
+
+Npm runtime audit:
+{"info": 0, "low": 0, "moderate": 0, "high": 0, "critical": 0, "total": 0}
+Npm total (incluye dev):
+{"info": 0, "low": 0, "moderate": 4, "high": 0, "critical": 0, "total": 4}
+
+Auditoría pública: 3 avisos de DSN ficticios preexistentes en pruebas; revisión documentada, sin valores impresos.

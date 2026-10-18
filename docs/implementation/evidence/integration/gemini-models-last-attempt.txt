@@ -1,0 +1,18 @@
+
+> gemini:models
+> npm run gemini:models -w @blinka/backend
+
+
+> @blinka/backend@0.1.0 gemini:models
+> tsx --env-file-if-exists=.env --env-file-if-exists=.env.gemini src/scripts/gemini-models.ts
+
+.env.gemini not found. Continuing without it.
+.env.gemini not found. Continuing without it.
+{"status":"BLOCKED","code":"BAD_REQUEST","reason":"Consulta de modelos fallida; no se reintenta","requests":1}
+npm error Lifecycle script `gemini:models` failed with error:
+npm error code 1
+npm error path /home/juanyi/Projects/Blinka_Agent/apps/backend
+npm error workspace @blinka/backend@0.1.0
+npm error location /home/juanyi/Projects/Blinka_Agent/apps/backend
+npm error command failed
+npm error command sh -c tsx --env-file-if-exists=.env --env-file-if-exists=.env.gemini src/scripts/gemini-models.ts

@@ -1,0 +1,13 @@
+{
+  "status": "BLOCKED",
+  "selectedModel": "gemini-3.8-flash",
+  "modelSelectionSource": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
+  "modelsGetAttempts": 2,
+  "lastClassification": "BAD_REQUEST",
+  "generationCalls": 0,
+  "invoicesSent": 0,
+  "remainingInitialRequestBudget": 8,
+  "estimatedGenerationCostUsd": "0",
+  "billingVerified": false,
+  "localGeminiUsageRows": 0
+}

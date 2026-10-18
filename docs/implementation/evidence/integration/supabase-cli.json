@@ -1,0 +1,18 @@
+{
+  "version": "2.121.0",
+  "authenticated": true,
+  "linkedProject": {
+    "name": "blinka_agent_demo",
+    "ref": "gagbmadasmzqsvbkxlmx",
+    "region": "us-east-1"
+  },
+  "businessMigrationsExecuted": false,
+  "remoteBusinessWrites": false,
+  "cliReadOnlyQuery": {
+    "result": "public schema exists",
+    "warning": "Initialising login role...",
+    "possibleInternalRoleDDL": true,
+    "furtherRemoteOperationsStopped": true
+  },
+  "runtimePreflight": "NOT_VERIFIED"
+}

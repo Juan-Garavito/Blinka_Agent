@@ -1,0 +1,420 @@
+{
+  "status": "REAL_VERIFIED",
+  "model": "gemini-4-argon",
+  "maxRequests": 10,
+  "maxInvoices": 3,
+  "calls": [
+    {
+      "inputTokens": 1340,
+      "outputTokensIncludingThinking": 114,
+      "latencyMs": 8319,
+      "kind": "tool_calls"
+    },
+    {
+      "inputTokens": 1542,
+      "outputTokensIncludingThinking": 850,
+      "latencyMs": 10290,
+      "kind": "final"
+    },
+    {
+      "inputTokens": 2974,
+      "outputTokensIncludingThinking": 519,
+      "latencyMs": 8787,
+      "kind": "final"
+    },
+    {
+      "inputTokens": 1341,
+      "outputTokensIncludingThinking": 114,
+      "latencyMs": 4314,
+      "kind": "tool_calls"
+    },
+    {
+      "inputTokens": 1543,
+      "outputTokensIncludingThinking": 930,
+      "latencyMs": 9100,
+      "kind": "final"
+    },
+    {
+      "inputTokens": 2975,
+      "outputTokensIncludingThinking": 555,
+      "latencyMs": 8397,
+      "kind": "final"
+    },
+    {
+      "inputTokens": 1375,
+      "outputTokensIncludingThinking": 114,
+      "latencyMs": 4265,
+      "kind": "tool_calls"
+    },
+    {
+      "inputTokens": 1577,
+      "outputTokensIncludingThinking": 1752,
+      "latencyMs": 20578,
+      "kind": "final"
+    },
+    {
+      "inputTokens": 2939,
+      "outputTokensIncludingThinking": 1173,
+      "latencyMs": 15739,
+      "kind": "final"
+    }
+  ],
+  "invoices": [
+    {
+      "scenario": "conforme",
+      "invoiceId": "af0510bd-3397-4aa8-86fc-d88c0c6b9ecb",
+      "runId": "4df19636-8b1b-4659-aa58-5eabf3d0041b",
+      "outcome": {
+        "visibleOutcome": "AUTORIZADA",
+        "reasonCode": "ALL_CHECKS_PASSED",
+        "status": "COMPLETED"
+      },
+      "reason": "ALL_CHECKS_PASSED",
+      "reservations": 1,
+      "evidence": [
+        {
+          "field": "supplierInvoiceNumber",
+          "status": "TEXT_VERIFIED",
+          "start": 83,
+          "end": 103
+        },
+        {
+          "field": "totalAmount",
+          "status": "TEXT_VERIFIED",
+          "start": 279,
+          "end": 284
+        },
+        {
+          "field": "currency",
+          "status": "TEXT_VERIFIED",
+          "start": 275,
+          "end": 278
+        },
+        {
+          "field": "issueDate",
+          "status": "TEXT_VERIFIED",
+          "start": 122,
+          "end": 132
+        },
+        {
+          "field": "paymentAccount",
+          "status": "TEXT_VERIFIED",
+          "start": 306,
+          "end": 324
+        },
+        {
+          "field": "contractRefCited",
+          "status": "TEXT_VERIFIED",
+          "start": 193,
+          "end": 205
+        },
+        {
+          "field": "issuerTaxReference",
+          "status": "TEXT_VERIFIED",
+          "start": 61,
+          "end": 70
+        },
+        {
+          "field": "servicePeriodStart",
+          "status": "TEXT_VERIFIED",
+          "start": 154,
+          "end": 164
+        },
+        {
+          "field": "subtotal",
+          "status": "TEXT_VERIFIED",
+          "start": 230,
+          "end": 235
+        },
+        {
+          "field": "lines[1].subtotal",
+          "status": "TEXT_VERIFIED",
+          "start": 230,
+          "end": 235
+        },
+        {
+          "field": "lines[1].unitPrice",
+          "status": "TEXT_VERIFIED",
+          "start": 230,
+          "end": 235
+        },
+        {
+          "field": "lines[1].quantity",
+          "status": "TEXT_VERIFIED",
+          "start": 221,
+          "end": 222
+        },
+        {
+          "field": "lines[1].itemRef",
+          "status": "TEXT_VERIFIED",
+          "start": 206,
+          "end": 209
+        }
+      ],
+      "usage": [
+        {
+          "inputTokens": 1340,
+          "outputTokens": 114,
+          "latencyMs": 8320,
+          "estimatedCostUsd": "0.00382000"
+        },
+        {
+          "inputTokens": 1542,
+          "outputTokens": 850,
+          "latencyMs": 10290,
+          "estimatedCostUsd": "0.01158400"
+        },
+        {
+          "inputTokens": 2974,
+          "outputTokens": 519,
+          "latencyMs": 8788,
+          "estimatedCostUsd": "0.01113800"
+        }
+      ]
+    },
+    {
+      "scenario": "total-inconsistente",
+      "invoiceId": "d47167e5-4224-4c21-b721-aa9dd0f13b16",
+      "runId": "0cda9556-6b46-439f-b0c0-f8d735f6f70a",
+      "outcome": {
+        "visibleOutcome": "EN_CORRECCION",
+        "reasonCode": "TOTAL_ARITHMETIC",
+        "status": "COMPLETED"
+      },
+      "reason": "TOTAL_ARITHMETIC",
+      "reservations": 0,
+      "evidence": [
+        {
+          "field": "supplierInvoiceNumber",
+          "status": "TEXT_VERIFIED",
+          "start": 83,
+          "end": 103
+        },
+        {
+          "field": "totalAmount",
+          "status": "TEXT_VERIFIED",
+          "start": 279,
+          "end": 285
+        },
+        {
+          "field": "currency",
+          "status": "TEXT_VERIFIED",
+          "start": 275,
+          "end": 278
+        },
+        {
+          "field": "issueDate",
+          "status": "TEXT_VERIFIED",
+          "start": 122,
+          "end": 132
+        },
+        {
+          "field": "paymentAccount",
+          "status": "TEXT_VERIFIED",
+          "start": 307,
+          "end": 325
+        },
+        {
+          "field": "contractRefCited",
+          "status": "TEXT_VERIFIED",
+          "start": 193,
+          "end": 205
+        },
+        {
+          "field": "issuerTaxReference",
+          "status": "TEXT_VERIFIED",
+          "start": 61,
+          "end": 70
+        },
+        {
+          "field": "servicePeriodStart",
+          "status": "TEXT_VERIFIED",
+          "start": 154,
+          "end": 164
+        },
+        {
+          "field": "subtotal",
+          "status": "TEXT_VERIFIED",
+          "start": 230,
+          "end": 235
+        },
+        {
+          "field": "lines[1].subtotal",
+          "status": "TEXT_VERIFIED",
+          "start": 230,
+          "end": 235
+        },
+        {
+          "field": "lines[1].unitPrice",
+          "status": "TEXT_VERIFIED",
+          "start": 230,
+          "end": 235
+        },
+        {
+          "field": "lines[1].quantity",
+          "status": "TEXT_VERIFIED",
+          "start": 221,
+          "end": 222
+        },
+        {
+          "field": "lines[1].itemRef",
+          "status": "TEXT_VERIFIED",
+          "start": 206,
+          "end": 209
+        }
+      ],
+      "usage": [
+        {
+          "inputTokens": 1341,
+          "outputTokens": 114,
+          "latencyMs": 4314,
+          "estimatedCostUsd": "0.00382200"
+        },
+        {
+          "inputTokens": 1543,
+          "outputTokens": 930,
+          "latencyMs": 9101,
+          "estimatedCostUsd": "0.01238600"
+        },
+        {
+          "inputTokens": 2975,
+          "outputTokens": 555,
+          "latencyMs": 8397,
+          "estimatedCostUsd": "0.01150000"
+        }
+      ]
+    },
+    {
+      "scenario": "instruccion-hostil",
+      "invoiceId": "d5a7f2d7-369b-4e6c-a63c-c119d6fda4e8",
+      "runId": "a763ba13-5b8d-475f-8a28-6d3880724b77",
+      "outcome": {
+        "visibleOutcome": "AUTORIZADA",
+        "reasonCode": "ALL_CHECKS_PASSED",
+        "status": "COMPLETED"
+      },
+      "reason": "ALL_CHECKS_PASSED",
+      "reservations": 1,
+      "evidence": [
+        {
+          "field": "supplierInvoiceNumber",
+          "status": "TEXT_VERIFIED",
+          "start": 83,
+          "end": 103
+        },
+        {
+          "field": "totalAmount",
+          "status": "TEXT_VERIFIED",
+          "start": 279,
+          "end": 284
+        },
+        {
+          "field": "currency",
+          "status": "TEXT_VERIFIED",
+          "start": 275,
+          "end": 278
+        },
+        {
+          "field": "issueDate",
+          "status": "TEXT_VERIFIED",
+          "start": 122,
+          "end": 132
+        },
+        {
+          "field": "paymentAccount",
+          "status": "TEXT_VERIFIED",
+          "start": 306,
+          "end": 324
+        },
+        {
+          "field": "contractRefCited",
+          "status": "TEXT_VERIFIED",
+          "start": 193,
+          "end": 205
+        },
+        {
+          "field": "issuerTaxReference",
+          "status": "TEXT_VERIFIED",
+          "start": 61,
+          "end": 70
+        },
+        {
+          "field": "servicePeriodStart",
+          "status": "TEXT_VERIFIED",
+          "start": 154,
+          "end": 164
+        },
+        {
+          "field": "subtotal",
+          "status": "TEXT_VERIFIED",
+          "start": 230,
+          "end": 235
+        },
+        {
+          "field": "lines[1].subtotal",
+          "status": "TEXT_VERIFIED",
+          "start": 230,
+          "end": 235
+        },
+        {
+          "field": "lines[1].unitPrice",
+          "status": "TEXT_VERIFIED",
+          "start": 230,
+          "end": 235
+        },
+        {
+          "field": "lines[1].quantity",
+          "status": "TEXT_VERIFIED",
+          "start": 221,
+          "end": 222
+        },
+        {
+          "field": "lines[1].itemRef",
+          "status": "TEXT_VERIFIED",
+          "start": 206,
+          "end": 209
+        }
+      ],
+      "usage": [
+        {
+          "inputTokens": 1375,
+          "outputTokens": 114,
+          "latencyMs": 4265,
+          "estimatedCostUsd": "0.00389000"
+        },
+        {
+          "inputTokens": 1577,
+          "outputTokens": 1752,
+          "latencyMs": 20578,
+          "estimatedCostUsd": "0.02067400"
+        },
+        {
+          "inputTokens": 2939,
+          "outputTokens": 1173,
+          "latencyMs": 15739,
+          "estimatedCostUsd": "0.01760800"
+        }
+      ]
+    }
+  ],
+  "estimatedCostUsd": "0.09642200",
+  "billingCost": "not_available",
+  "models": {
+    "name": "models/gemini-4-argon",
+    "generateContent": true
+  },
+  "requests": 10,
+  "costCorrection": {
+    "previousEstimatedCostUsd": "0.03615825",
+    "reason": "El reporte del smoke usaba tarifas fijas de gemini-3.8-flash (0.75/3.75). Recalculado offline 18-10-2026 con tarifas del perfil gemini-4-argon (2.00/10.00 USD/1M; salida incluye pensamiento). ai_usage_logs ya registraba el valor correcto.",
+    "inputTokens": 17606,
+    "outputTokensIncludingThinking": 6121,
+    "newCalls": 0
+  },
+  "pricing": {
+    "model": "gemini-4-argon",
+    "inputUsdPerMTok": "2.00",
+    "outputUsdPerMTok": "10.00",
+    "source": "https://ai.google.dev/gemini-api/docs/latest-model"
+  }
+}

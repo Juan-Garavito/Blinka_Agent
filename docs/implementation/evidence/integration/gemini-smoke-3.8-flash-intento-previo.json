@@ -1,0 +1,94 @@
+{
+  "status": "BLOCKED",
+  "model": "gemini-3.8-flash",
+  "maxRequests": 8,
+  "maxInvoices": 3,
+  "calls": [
+    {
+      "inputTokens": 1099,
+      "outputTokensIncludingThinking": 191,
+      "latencyMs": 2623,
+      "kind": "tool_calls"
+    },
+    {
+      "inputTokens": 1368,
+      "outputTokensIncludingThinking": 1710,
+      "latencyMs": 10567,
+      "kind": "final"
+    },
+    {
+      "status": "FAILED",
+      "inputTokens": null,
+      "outputTokensIncludingThinking": null,
+      "latencyMs": 1825,
+      "usageKnown": false
+    }
+  ],
+  "invoices": [],
+  "estimatedCostUsd": "0.00897900",
+  "billingCost": "not_available",
+  "models": {
+    "models": [
+      {
+        "name": "models/gemini-2.5-flash",
+        "generateContent": true
+      },
+      {
+        "name": "models/gemini-2.5-flash-lite",
+        "generateContent": true
+      },
+      {
+        "name": "models/gemini-2.5-flash-image",
+        "generateContent": true
+      },
+      {
+        "name": "models/gemini-3.1-flash-lite",
+        "generateContent": true
+      },
+      {
+        "name": "models/gemini-3.1-flash-image",
+        "generateContent": true
+      },
+      {
+        "name": "models/gemini-3.1-flash-lite-image",
+        "generateContent": true
+      },
+      {
+        "name": "models/gemini-3.5-flash",
+        "generateContent": true
+      },
+      {
+        "name": "models/gemini-3.5-flash-lite",
+        "generateContent": true
+      },
+      {
+        "name": "models/gemini-omni-1.1-flash",
+        "generateContent": true
+      },
+      {
+        "name": "models/gemini-3.6-flash",
+        "generateContent": true
+      },
+      {
+        "name": "models/gemini-3.7-flash",
+        "generateContent": true
+      },
+      {
+        "name": "models/gemini-3.8-flash",
+        "generateContent": true
+      },
+      {
+        "name": "models/gemini-3.8-flash-tts",
+        "generateContent": true
+      },
+      {
+        "name": "models/gemini-3.8-flash-lite-tts",
+        "generateContent": true
+      }
+    ],
+    "truncated": true
+  },
+  "reason": "BAD_REQUEST",
+  "failedCallBilling": "unknown_if_provider_returned_no_usage",
+  "requests": 4
+}

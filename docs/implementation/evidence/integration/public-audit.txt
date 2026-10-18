@@ -1,0 +1,185 @@
+
+> security:public
+> node scripts/audit-public.mjs
+
+{
+  "status": "REVIEW_REQUIRED",
+  "scannedFiles": 360,
+  "findings": [
+    {
+      "file": "apps/backend/test/integration/processes.test.ts",
+      "category": "remote-database-credential-review"
+    },
+    {
+      "file": "apps/backend/test/integration/provisioning.test.ts",
+      "category": "remote-database-credential-review"
+    },
+    {
+      "file": "apps/backend/test/unit/db-target.test.ts",
+      "category": "remote-database-credential-review"
+    }
+  ],
+  "documents": [
+    {
+      "file": "docs/demo/factura-alfa-prueba.pdf",
+      "classification": "local-demo-evidence-or-fictional-fixture"
+    },
+    {
+      "file": "docs/demo/hoja-horas-alfa-prueba.pdf",
+      "classification": "local-demo-evidence-or-fictional-fixture"
+    },
+    {
+      "file": "docs/implementation/evidence/frontend/02-nueva-factura-desktop.png",
+      "classification": "local-demo-evidence-or-fictional-fixture"
+    },
+    {
+      "file": "docs/implementation/evidence/frontend/02-nueva-factura-mobile.png",
+      "classification": "local-demo-evidence-or-fictional-fixture"
+    },
+    {
+      "file": "docs/implementation/evidence/frontend/03-decision-autorizada-desktop.png",
+      "classification": "local-demo-evidence-or-fictional-fixture"
+    },
+    {
+      "file": "docs/implementation/evidence/frontend/03-decision-autorizada-mobile.png",
+      "classification": "local-demo-evidence-or-fictional-fixture"
+    },
+    {
+      "file": "docs/implementation/evidence/frontend/04-evidencia-desktop.png",
+      "classification": "local-demo-evidence-or-fictional-fixture"
+    },
+    {
+      "file": "docs/implementation/evidence/frontend/04-evidencia-mobile.png",
+      "classification": "local-demo-evidence-or-fictional-fixture"
+    },
+    {
+      "file": "docs/implementation/evidence/frontend/05-aprobacion-desktop.png",
+      "classification": "local-demo-evidence-or-fictional-fixture"
+    },
+    {
+      "file": "docs/implementation/evidence/frontend/06-confirmacion-desktop.png",
+      "classification": "local-demo-evidence-or-fictional-fixture"
+    },
+    {
+      "file": "docs/implementation/evidence/frontend/aprobaciones-desktop.png",
+      "classification": "local-demo-evidence-or-fictional-fixture"
+    },
+    {
+      "file": "docs/implementation/evidence/frontend/aprobaciones-mobile.png",
+      "classification": "local-demo-evidence-or-fictional-fixture"
+    },
+    {
+      "file": "docs/implementation/evidence/frontend/aprobaciones-tablet.png",
+      "classification": "local-demo-evidence-or-fictional-fixture"
+    },
+    {
+      "file": "docs/implementation/evidence/frontend/auditoria-desktop.png",
+      "classification": "local-demo-evidence-or-fictional-fixture"
+    },
+    {
+      "file": "docs/implementation/evidence/frontend/auditoria-mobile.png",
+      "classification": "local-demo-evidence-or-fictional-fixture"
+    },
+    {
+      "file": "docs/implementation/evidence/frontend/auditoria-tablet.png",
+      "classification": "local-demo-evidence-or-fictional-fixture"
+    },
+    {
+      "file": "docs/implementation/evidence/frontend/configuracion-desktop.png",
+      "classification": "local-demo-evidence-or-fictional-fixture"
+    },
+    {
+      "file": "docs/implementation/evidence/frontend/configuracion-mobile.png",
+      "classification": "local-demo-evidence-or-fictional-fixture"
+    },
+    {
+      "file": "docs/implementation/evidence/frontend/configuracion-tablet.png",
+      "classification": "local-demo-evidence-or-fictional-fixture"
+    },
+    {
+      "file": "docs/implementation/evidence/frontend/contratos-desktop.png",
+      "classification": "local-demo-evidence-or-fictional-fixture"
+    },
+    {
+      "file": "docs/implementation/evidence/frontend/contratos-mobile.png",
+      "classification": "local-demo-evidence-or-fictional-fixture"
+    },
+    {
+      "file": "docs/implementation/evidence/frontend/contratos-tablet.png",
+      "classification": "local-demo-evidence-or-fictional-fixture"
+    },
+    {
+      "file": "docs/implementation/evidence/frontend/dashboard-desktop.png",
+      "classification": "local-demo-evidence-or-fictional-fixture"
+    },
+    {
+      "file": "docs/implementation/evidence/frontend/dashboard-mobile.png",
+      "classification": "local-demo-evidence-or-fictional-fixture"
+    },
+    {
+      "file": "docs/implementation/evidence/frontend/dashboard-tablet.png",
+      "classification": "local-demo-evidence-or-fictional-fixture"
+    },
+    {
+      "file": "docs/implementation/evidence/frontend/facturas-desktop.png",
+      "classification": "local-demo-evidence-or-fictional-fixture"
+    },
+    {
+      "file": "docs/implementation/evidence/frontend/facturas-mobile.png",
+      "classification": "local-demo-evidence-or-fictional-fixture"
+    },
+    {
+      "file": "docs/implementation/evidence/frontend/facturas-tablet.png",
+      "classification": "local-demo-evidence-or-fictional-fixture"
+    },
+    {
+      "file": "docs/implementation/evidence/frontend/nueva-factura-desktop.png",
+      "classification": "local-demo-evidence-or-fictional-fixture"
+    },
+    {
+      "file": "docs/implementation/evidence/frontend/nueva-factura-mobile.png",
+      "classification": "local-demo-evidence-or-fictional-fixture"
+    },
+    {
+      "file": "docs/implementation/evidence/frontend/nueva-factura-tablet.png",
+      "classification": "local-demo-evidence-or-fictional-fixture"
+    },
+    {
+      "file": "docs/implementation/evidence/frontend/politicas-desktop.png",
+      "classification": "local-demo-evidence-or-fictional-fixture"
+    },
+    {
+      "file": "docs/implementation/evidence/frontend/politicas-mobile.png",
+      "classification": "local-demo-evidence-or-fictional-fixture"
+    },
+    {
+      "file": "docs/implementation/evidence/frontend/politicas-tablet.png",
+      "classification": "local-demo-evidence-or-fictional-fixture"
+    },
+    {
+      "file": "docs/implementation/evidence/frontend/presupuestos-desktop.png",
+      "classification": "local-demo-evidence-or-fictional-fixture"
+    },
+    {
+      "file": "docs/implementation/evidence/frontend/presupuestos-mobile.png",
+      "classification": "local-demo-evidence-or-fictional-fixture"
+    },
+    {
+      "file": "docs/implementation/evidence/frontend/presupuestos-tablet.png",
+      "classification": "local-demo-evidence-or-fictional-fixture"
+    },
+    {
+      "file": "docs/implementation/evidence/frontend/proveedores-desktop.png",
+      "classification": "local-demo-evidence-or-fictional-fixture"
+    },
+    {
+      "file": "docs/implementation/evidence/frontend/proveedores-mobile.png",
+      "classification": "local-demo-evidence-or-fictional-fixture"
+    },
+    {
+      "file": "docs/implementation/evidence/frontend/proveedores-tablet.png",
+      "classification": "local-demo-evidence-or-fictional-fixture"
+    }
+  ],
+  "limits": "Auditoría heurística de archivos publicables; no certifica ausencia de todos los secretos ni sustituye revisión humana de documentos."
+}

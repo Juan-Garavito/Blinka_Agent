@@ -1,0 +1,53 @@
+{
+  "status": "BLOCKED",
+  "model": "gemini-4-argon",
+  "maxRequests": 10,
+  "maxInvoices": 3,
+  "calls": [
+    {
+      "inputTokens": 1340,
+      "outputTokensIncludingThinking": 114,
+      "latencyMs": 4124,
+      "kind": "tool_calls"
+    },
+    {
+      "inputTokens": 1542,
+      "outputTokensIncludingThinking": 769,
+      "latencyMs": 7814,
+      "kind": "final"
+    },
+    {
+      "status": "FAILED",
+      "inputTokens": null,
+      "outputTokensIncludingThinking": null,
+      "latencyMs": 1312,
+      "usageKnown": false
+    }
+  ],
+  "invoices": [],
+  "estimatedCostUsd": "0.01459400",
+  "billingCost": "not_available",
+  "models": {
+    "name": "models/gemini-4-argon",
+    "generateContent": true
+  },
+  "reason": "BAD_REQUEST",
+  "failedCallBilling": "unknown_if_provider_returned_no_usage",
+  "requests": 4,
+  "transportFailure": {
+    "httpStatus": 400
+  },
+  "costCorrection": {
+    "previousEstimatedCostUsd": "0.00547275",
+    "reason": "El reporte del smoke usaba tarifas fijas de gemini-3.8-flash (0.75/3.75). Recalculado offline 18-10-2026 con tarifas del perfil gemini-4-argon (2.00/10.00 USD/1M; salida incluye pensamiento). ai_usage_logs ya registraba el valor correcto.",
+    "inputTokens": 2882,
+    "outputTokensIncludingThinking": 883,
+    "newCalls": 0
+  },
+  "pricing": {
+    "model": "gemini-4-argon",
+    "inputUsdPerMTok": "2.00",
+    "outputUsdPerMTok": "10.00",
+    "source": "https://ai.google.dev/gemini-api/docs/latest-model"
+  }
+}

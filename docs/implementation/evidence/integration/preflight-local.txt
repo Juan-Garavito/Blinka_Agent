@@ -1,0 +1,76 @@
+
+> integration:preflight
+> npm run integration:preflight -w @blinka/backend --
+
+
+> @blinka/backend@0.1.0 integration:preflight
+> tsx --env-file-if-exists=.env --env-file-if-exists=.env.supabase src/scripts/integration-preflight.ts
+
+.env.supabase not found. Continuing without it.
+.env.supabase not found. Continuing without it.
+{
+  "status": "READ_ONLY_VERIFIED",
+  "linkedProject": null,
+  "target": {
+    "host": "127.0.0.1",
+    "port": "54329",
+    "database": "blinka_dev",
+    "isLocal": true
+  },
+  "connection": "DATABASE_URL",
+  "runtimeTarget": {
+    "host": "127.0.0.1",
+    "port": "54329",
+    "database": "blinka_dev",
+    "isLocal": true
+  },
+  "identity": {
+    "database": "blinka_dev",
+    "database_user": "blinka",
+    "postgres_version": "17.11",
+    "postgres_version_num": 170011,
+    "read_only": "on",
+    "ssl": false,
+    "can_connect": true,
+    "can_create_schema": true,
+    "can_create_public": true,
+    "superuser": true,
+    "can_create_roles": true
+  },
+  "extensions": [
+    {
+      "name": "btree_gist",
+      "installed_version": "1.7",
+      "default_version": "1.7"
+    },
+    {
+      "name": "pgcrypto",
+      "installed_version": null,
+      "default_version": "1.3"
+    }
+  ],
+  "schemas": [
+    {
+      "nspname": "drizzle",
+      "can_use": true,
+      "can_create": true
+    },
+    {
+      "nspname": "graphile_worker",
+      "can_use": true,
+      "can_create": true
+    },
+    {
+      "nspname": "public",
+      "can_use": true,
+      "can_create": true
+    }
+  ],
+  "graphile": {
+    "present": true,
+    "revision": 20,
+    "expectedRevisionFor018": 20,
+    "runtimeStartupMayExecuteDDL": true
+  },
+  "note": "No prueba arranque de Graphile: puede ejecutar DDL. No arrancar API/worker remotos sin autorización."
+}
