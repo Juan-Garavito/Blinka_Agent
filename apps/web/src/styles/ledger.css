@@ -1,0 +1,27 @@
+/* Tablas tipo ledger: filas con líneas de 1 px, importes a la derecha, moneda explícita. */
+.ledger { width: 100%; border-collapse: collapse; background: var(--paper); font-size: var(--fs-md); }
+.ledger caption { text-align: left; padding: 0 0 8px; color: var(--muted); font-size: var(--fs-sm); }
+.ledger th {
+  text-align: left; font-size: var(--fs-xs); font-weight: 650; letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--muted); padding: 10px 14px; border-bottom: 1px solid var(--line-strong); background: var(--paper); position: sticky; top: 0;
+}
+.ledger th.num { text-align: right; }
+.ledger td { padding: 12px 14px; border-bottom: var(--hairline); vertical-align: middle; }
+.ledger tbody tr { transition: background var(--motion-fast) var(--ease); }
+.ledger tbody tr:hover { background: #f9fbfc; }
+.ledger tr.is-link { cursor: pointer; }
+.ledger .primary-cell { font-weight: 600; color: var(--brand-navy); }
+.ledger .primary-cell a { color: inherit; text-decoration: none; }
+.ledger .primary-cell a:hover { text-decoration: underline; }
+.ledger .sub { display: block; font-size: var(--fs-xs); color: var(--muted); font-weight: 450; }
+.ledger-wrap { border: var(--hairline); border-radius: var(--radius); overflow-x: auto; background: var(--paper); }
+
+/* Móvil: cada fila se apila como ficha, priorizando datos clave (sin scroll horizontal). */
+@media (max-width: 720px) {
+  .ledger.stack thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .ledger.stack tr { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; padding: 12px 14px; border-bottom: var(--hairline); }
+  .ledger.stack td { padding: 0; border: 0; text-align: left; }
+  .ledger.stack td[data-label]::before { content: attr(data-label) " · "; color: var(--muted); font-size: var(--fs-xs); }
+  .ledger.stack td.num { text-align: right; }
+  .ledger.stack td.hide-sm { display: none; }
+}

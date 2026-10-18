@@ -1,0 +1,114 @@
+@import "@fontsource-variable/inter/index.css";
+@import "@fontsource-variable/manrope/index.css";
+@import "./tokens.css";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: var(--fs-base);
+  line-height: 1.5;
+  font-feature-settings: "cv11", "ss01";
+  -webkit-font-smoothing: antialiased;
+}
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  color: var(--brand-navy);
+  margin: 0;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+h1 {
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+}
+h2 {
+  font-size: var(--fs-xl);
+  font-weight: 650;
+}
+h3 {
+  font-size: var(--fs-lg);
+  font-weight: 650;
+}
+p {
+  margin: 0;
+}
+a {
+  color: var(--brand-petrol-dark);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+a:hover {
+  color: var(--brand-navy);
+}
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: var(--radius-sm);
+}
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+.num,
+td.num,
+th.num {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+}
+.mono {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  letter-spacing: -0.01em;
+}
+.muted {
+  color: var(--muted);
+}
+.eyebrow {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+.skip-link {
+  position: absolute;
+  left: var(--s-4);
+  top: -48px;
+  background: var(--brand-navy);
+  color: #fff;
+  padding: var(--s-2) var(--s-3);
+  z-index: 100;
+  border-radius: var(--radius-sm);
+}
+.skip-link:focus {
+  top: var(--s-2);
+}
+::selection {
+  background: var(--brand-petrol-soft);
+}

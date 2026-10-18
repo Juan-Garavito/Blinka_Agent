@@ -1,0 +1,88 @@
+/* Blinka Precision Interface — tokens (Reglas de diseño v2.1 §3, §4, §11; UX §3.4). */
+:root {
+  /* Marca */
+  --brand-navy: #153454;
+  --brand-navy-deep: #0e293f;
+  --brand-petrol: #0d6871;
+  --brand-petrol-dark: #09545c;
+  --brand-gold: #d6a357;
+  --brand-petrol-soft: #d9eeea;
+
+  /* Superficies y texto */
+  --canvas: #f7f9fb;
+  --paper: #ffffff;
+  --ink: #172a3c;
+  --muted: #5d6e80; /* ligeramente más oscuro que #667789 para ≥4.5:1 sobre --canvas */
+  --muted-2: #667789;
+  --line: #dfe7ec;
+  --line-strong: #c9d5dd;
+  --tint: #eef3f6;
+
+  /* Estados de negocio: texto + icono + explicación, nunca solo color */
+  --st-authorized: #146c43;
+  --st-approval: #a15c07;
+  --st-correction: #b54708;
+  --st-blocked: #b42318;
+  --st-rejected: #881337;
+  --st-error: #6d28d9;
+  --st-authorized-bg: #e8f3ed;
+  --st-approval-bg: #fbf1e3;
+  --st-correction-bg: #fcefe6;
+  --st-blocked-bg: #fbeceb;
+  --st-rejected-bg: #f8e9ee;
+  --st-error-bg: #f1ecfc;
+
+  /* Tipografía */
+  --font-display: "Manrope Variable", "Manrope", system-ui, sans-serif;
+  --font-ui: "Inter Variable", "Inter", system-ui, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --fs-xs: 12px;
+  --fs-sm: 13px;
+  --fs-md: 14px;
+  --fs-base: 15px;
+  --fs-lg: 18px;
+  --fs-xl: 22px;
+  --fs-2xl: 30px;
+  --fs-3xl: 40px;
+
+  /* Espaciado 8 px y retícula */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 48px;
+  --s-8: 64px;
+  --content-max: 1520px;
+  --gutter: clamp(16px, 3.2vw, 48px);
+  --radius-sm: 4px;
+  --radius: 8px;
+  --hairline: 1px solid var(--line);
+  --focus-ring: 0 0 0 2px var(--paper), 0 0 0 4px var(--brand-petrol-dark);
+
+  /* Movimiento */
+  --motion-fast: 140ms;
+  --motion-base: 200ms;
+  --motion-context: 260ms;
+  --motion-evidence: 380ms;
+  --motion-confirm: 500ms;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-fast: 0ms;
+    --motion-base: 0ms;
+    --motion-context: 0ms;
+    --motion-evidence: 0ms;
+    --motion-confirm: 0ms;
+  }
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

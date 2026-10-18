@@ -1,0 +1,39 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 9px 2px 7px;
+  border-radius: 999px;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  line-height: 20px;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+.lg {
+  font-size: var(--fs-md);
+  padding: 4px 12px 4px 9px;
+}
+.authorized { color: var(--st-authorized); background: var(--st-authorized-bg); border-color: color-mix(in srgb, var(--st-authorized) 22%, transparent); }
+.approval { color: var(--st-approval); background: var(--st-approval-bg); border-color: color-mix(in srgb, var(--st-approval) 25%, transparent); }
+.correction { color: var(--st-correction); background: var(--st-correction-bg); border-color: color-mix(in srgb, var(--st-correction) 25%, transparent); }
+.blocked { color: var(--st-blocked); background: var(--st-blocked-bg); border-color: color-mix(in srgb, var(--st-blocked) 25%, transparent); }
+.rejected { color: var(--st-rejected); background: var(--st-rejected-bg); border-color: color-mix(in srgb, var(--st-rejected) 25%, transparent); }
+.error { color: var(--st-error); background: var(--st-error-bg); border-color: color-mix(in srgb, var(--st-error) 25%, transparent); }
+/* Estados técnicos: contorno, sin relleno de color, para no confundirlos con decisiones. */
+.tech {
+  color: var(--muted);
+  background: transparent;
+  border: 1px dashed var(--line-strong);
+  font-weight: 550;
+}
+.processing {
+  color: var(--brand-petrol-dark);
+  border-color: color-mix(in srgb, var(--brand-petrol) 45%, transparent);
+}
+.processing svg {
+  animation: pulse 1.6s var(--ease) infinite;
+}
+@keyframes pulse {
+  50% { opacity: 0.35; }
+}
