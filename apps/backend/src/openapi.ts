@@ -219,6 +219,17 @@ export const openApiDocument = {
     "/api/evaluation-runs/{id}/evidence": { get: op({ summary: "Evidencias verificadas (página/posición) y contratos examinados de una corrida", tag: "Evaluaciones", params: [idParam()] }) },
     "/api/documents/{id}/text": { get: op({ summary: "Capa de texto del documento (para resaltar evidencias)", tag: "Documentos", params: [idParam()] }) },
     "/api/ai-usage": { get: op({ summary: "Consumo de IA por llamada (sin prompts); isSimulated = MOCK", tag: "Auditoría", params: [{ name: "evaluationRunId", in: "query", schema: uuid }] }) },
+    "/api/business-metrics": {
+      get: op({
+        summary: "Dashboard de negocio y ROI (RF-23/RF-30): hechos medidos, coste de IA estimado y ahorro hipotético con supuestos explícitos",
+        tag: "Operaciones",
+        params: [
+          { name: "period", in: "query", schema: { type: "string", pattern: "^\\d{4}-(0[1-9]|1[0-2])$" } },
+          { name: "reviewMinutes", in: "query", schema: { type: "integer", minimum: 1, maximum: 240, default: 15 } },
+          { name: "analystHourlyUsd", in: "query", schema: { type: "string", default: "12.00" } },
+        ],
+      }),
+    },
     "/api/ai-usage/summary": {
       get: op({
         summary: "Totalizado del coste estimado de IA: real/simulado, por modelo, etapa, día y factura (RF-30)",

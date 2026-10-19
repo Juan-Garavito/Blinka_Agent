@@ -118,4 +118,35 @@ describe("Endpoints de solo lectura para el frontend", () => {
     expect((await c.get("/api/ai-usage/summary?from=2999-01-01")).body.totals).toEqual([]);
     expect((await c.get("/api/ai-usage/summary?from=hoy")).status).toBe(400);
   });
+
+  it("GET /api/business-metrics: dashboard de negocio y ROI con definiciones, supuestos explícitos y aritmética exacta", async () => {
+    const m = (body: { metrics: Array<{ key: string; value: unknown; hypothetical: boolean; definition: string; source: string }> }, key: string) => body.metrics.find((x) => x.key === key)!;
+    const { rows } = await db.pool.query<{ total: string }>("select coalesce(sum(reserved_amount_base),0)::numeric(18,4)::text as total from budget_reservations where company_id = $1", [c.company.id]);
+    const body = (await c.get("/api/business-metrics?reviewMinutes=10&analystHourlyUsd=30")).body;
+    expect(body.assumptions).toEqual({ reviewMinutes: 10, analystHourlyUsd: "30" });
+    expect(m(body, "received").value).toBe(3);
+    expect(m(body, "analyzed").value).toBe(2);
+    expect(m(body, "automationRate").value).toBe("100.0"); // 1 autorizada por el motor + 1 bloqueada
+    expect(m(body, "authorizedVolume").value).toBe(rows[0]!.total);
+    expect(m(body, "aiCost").value).toBe("0.030000");
+    expect(m(body, "aiCostPerAnalysis").value).toBe("0.030000");
+    // Supuestos: 10 min × 30 USD/h = 5 USD por factura; 2 resueltas → 20 min, 10 USD evitados.
+    expect(m(body, "timeSaved").value).toBe("0.33");
+    expect(m(body, "manualCostPerInvoice").value).toBe("5.000000");
+    expect(m(body, "manualCostAvoided").value).toBe("10.000000");
+    expect(m(body, "netSavings").value).toBe("9.970000");
+    expect(m(body, "roi").value).toBe("332.33");
+    // Hechos medidos vs. ahorro hipotético: separados y documentados.
+    expect(m(body, "aiCost").hypothetical).toBe(false);
+    expect(["timeSaved", "manualCostAvoided", "netSavings", "roi"].every((k) => m(body, k).hypothetical)).toBe(true);
+    expect(body.metrics.every((x: { definition: string; source: string }) => x.definition.length > 10 && x.source.length > 3)).toBe(true);
+    // Defaults visibles, aislamiento entre empresas y validación.
+    expect((await c.get("/api/business-metrics")).body.assumptions).toEqual({ reviewMinutes: 15, analystHourlyUsd: "12.00" });
+    const o = (await other.get("/api/business-metrics")).body;
+    expect(m(o, "analyzed").value).toBe(0);
+    expect(m(o, "automationRate").value).toBeNull();
+    expect(m(o, "aiCost").value).toBe("5.000000");
+    expect((await c.get("/api/business-metrics?period=2026-13")).status).toBe(400);
+    expect((await c.get("/api/business-metrics?analystHourlyUsd=-1")).status).toBe(400);
+  });
 });

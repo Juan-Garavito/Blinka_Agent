@@ -2,6 +2,7 @@ import { Router } from "express";
 import type { Env } from "./config/env.js";
 import { systemRouter } from "./modules/system/system.routes.js";
 import { dashboardRouter } from "./modules/dashboard/dashboard.routes.js";
+import { businessRouter } from "./modules/insights/business.routes.js";
 import { auditRouter } from "./modules/audit/audit.routes.js";
 import { approvalsRouter } from "./modules/approvals/approvals.routes.js";
 import { createApprovalsService } from "./modules/approvals/approvals.service.js";
@@ -131,6 +132,7 @@ export function createApiRouter({ env, db, logger, storage, fxProvider, aiProvid
   );
   scoped.use(systemRouter({ aiProvider, fxProvider, storage }));
   scoped.use(dashboardRouter(db.db));
+  scoped.use(businessRouter(db.db));
   scoped.use(approvalsRouter(createApprovalsService({ db: db.db, evaluations: core.evaluations })));
   scoped.use(
     analysisRouter({
