@@ -40,7 +40,9 @@
     "supabase:secrets": "tsx src/scripts/supabase-secrets.ts",
     "db:seed:supabase": "tsx --env-file-if-exists=.env --env-file=.env.supabase src/shared/db/seed.ts",
     "db:seed:demo:supabase": "tsx --env-file-if-exists=.env --env-file=.env.supabase src/shared/db/seed.ts --demo",
-    "db:extensions:supabase": "tsx --env-file-if-exists=.env --env-file=.env.supabase src/scripts/supabase-extensions.ts"
+    "db:extensions:supabase": "tsx --env-file-if-exists=.env --env-file=.env.supabase src/scripts/supabase-extensions.ts",
+    "ai:cost": "tsx --env-file-if-exists=.env src/scripts/ai-cost-report.ts",
+    "ai:cost:supabase": "tsx --env-file-if-exists=.env --env-file=.env.supabase src/scripts/ai-cost-report.ts"
   },
   "dependencies": {
     "@langchain/core": "^1.2.18",
