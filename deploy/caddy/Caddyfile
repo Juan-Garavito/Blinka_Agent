@@ -1,0 +1,7 @@
+# Proxy HTTPS delante de la API (que sirve también el frontend: same-origin).
+# DOMAIN=localhost → certificado de la CA interna de Caddy (el navegador avisará salvo que se confíe en ella).
+# DOMAIN=tu.dominio.com → certificado automático de Let's Encrypt (requiere DNS y puertos 80/443 abiertos).
+{$DOMAIN:localhost} {
+	encode zstd gzip
+	reverse_proxy api:4000
+}

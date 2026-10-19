@@ -1,0 +1,90 @@
+# PRODUCCIÓN: API + worker (misma imagen) contra Supabase (BD + Storage, TLS verify-full) y Gemini real,
+# detrás de Caddy (HTTPS automático). Sin PostgreSQL local ni migraciones: Supabase ya está migrado y las
+# migraciones se ejecutan aparte, con autorización (npm run db:migrate:supabase).
+#
+#   REMOTE_DB_CONFIRM=aws-0-us-east-1.pooler.supabase.com/postgres DOMAIN=localhost \
+#     docker compose -f docker-compose.prod.yml up -d --build
+#
+# Secretos: solo en los .env locales ignorados por Git (nunca en la imagen). `format: raw` evita que Compose
+# interprete caracteres como `$` dentro de contraseñas o claves.
+name: blinka-prod
+
+# Solo los perfiles de producción: el .env base (seed, BD local de pruebas) NO se carga en los contenedores.
+x-env-files: &env-files
+  - path: apps/backend/.env.supabase
+    required: true
+    format: raw
+  - path: apps/backend/.env.gemini
+    required: true
+    format: raw
+
+x-prod-env: &prod-env
+  NODE_ENV: production
+  LOG_FORMAT: json
+  LOG_LEVEL: info
+  HOST: 0.0.0.0
+  PORT: "4000"
+  # Un salto de proxy de confianza (Caddy): IP real del cliente para el rate limit.
+  TRUST_PROXY: "1"
+  # Debe coincidir EXACTAMENTE con la URL del navegador (https y puerto si no es 443).
+  ALLOWED_ORIGINS: ${PUBLIC_ORIGIN:-https://localhost}
+  SESSION_COOKIE_SECURE: "true"
+  FX_PROVIDER: frankfurter
+  # Autorización explícita del destino remoto, obligatoria al arrancar (no se guarda en archivos).
+  REMOTE_DB_CONFIRM: ${REMOTE_DB_CONFIRM:?Define REMOTE_DB_CONFIRM=<host>/<base> para autorizar Supabase}
+  DATABASE_SSL: verify-full
+  DATABASE_SSL_CA_FILE: /run/certs/supabase-ca.crt
+
+x-prod-volumes: &prod-volumes
+  - ./apps/backend/.certs/supabase-prod-ca-2021.crt:/run/certs/supabase-ca.crt:ro
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: apps/backend/Dockerfile
+    image: blinka-payguard-backend:prod
+    command: ["node", "dist/server.js"]
+    env_file: *env-files
+    environment: *prod-env
+    volumes: *prod-volumes
+    expose: ["4000"]
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:4000/ready').then((r)=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    restart: unless-stopped
+
+  worker:
+    image: blinka-payguard-backend:prod
+    pull_policy: never
+    command: ["node", "dist/worker.js"]
+    env_file: *env-files
+    environment: *prod-env
+    volumes: *prod-volumes
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+
+  caddy:
+    image: caddy:2-alpine
+    environment:
+      DOMAIN: ${DOMAIN:-localhost}
+    ports:
+      - "${HTTP_PORT:-80}:80"
+      - "${HTTPS_PORT:-443}:443"
+    volumes:
+      - ./deploy/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  caddy_data:
+  caddy_config:

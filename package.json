@@ -41,6 +41,10 @@
     "verify:mock": "node scripts/verify-mock.mjs",
     "start:cloud": "npm run build && node scripts/start-cloud.mjs",
     "start:cloud:check": "node scripts/start-cloud.mjs --check",
+    "prod:check": "REMOTE_DB_CONFIRM=${REMOTE_DB_CONFIRM:-solo-validacion} docker compose -f docker-compose.prod.yml config --quiet && echo prod-config-ok",
+    "prod:up": "docker compose -f docker-compose.prod.yml up -d --build --wait",
+    "prod:logs": "docker compose -f docker-compose.prod.yml logs -f api worker",
+    "prod:down": "docker compose -f docker-compose.prod.yml down",
     "analyze:batch": "npm run analyze:batch -w @blinka/backend --"
   },
   "devDependencies": {
