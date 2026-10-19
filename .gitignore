@@ -34,6 +34,7 @@ supabase/.branches/
 
 # Certificados locales (CA de Supabase u otros): no se versionan
 *.crt
+*.cer
 .certs/
 
 # Capturas de evidencia: se conservan en local, no se versionan
