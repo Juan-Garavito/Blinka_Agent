@@ -217,11 +217,14 @@ export default function Dashboard() {
                   </span>
                   <span className="num muted">
                     {u.calls} llamadas · {u.inputTokens + u.outputTokens} tokens
+                    {!u.isSimulated && <> · ≈ {formatDecimal(u.estimatedCostUsd, { minFraction: 2, maxFraction: 6 })} USD</>}
                   </span>
                 </div>
               ))}
-              {ai.every((u) => u.isSimulated) && (
+              {ai.every((u) => u.isSimulated) ? (
                 <p className={styles.budgetNote}>Proveedor simulado: tokens estimados y costo 0. No se usó un modelo real.</p>
+              ) : (
+                <p className={styles.budgetNote}>Coste estimado con el precio de lista configurado (incluye pensamiento). No es la factura del proveedor.</p>
               )}
             </section>
           )}
