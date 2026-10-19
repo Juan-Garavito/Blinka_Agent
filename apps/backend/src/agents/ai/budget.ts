@@ -32,7 +32,11 @@ export class BudgetedAIProvider implements AIProvider {
 
   async generate(req: AIRequest): Promise<AIResponse> {
     if (this.requests >= this.limits.maxRequests || new D(this.costUsd).gte(this.limits.maxCostUsd)) {
-      throw new AIProviderError("BUDGET_EXCEEDED", false, "Presupuesto del proceso para IA real agotado; no se realizan más llamadas");
+      throw new AIProviderError(
+        "AI_SPEND_LIMIT",
+        false,
+        `Tope de gasto de IA del proceso alcanzado (${this.requests}/${this.limits.maxRequests} llamadas, ${this.costUsd}/${this.limits.maxCostUsd} USD estimados). No es una decisión financiera: reinicia el worker o amplía AI_MAX_REQUESTS_PER_PROCESS / AI_MAX_COST_USD_PER_PROCESS y reanaliza.`,
+      );
     }
     this.requests++;
     try {

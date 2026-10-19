@@ -135,6 +135,8 @@ export async function runSpecialist<O extends z.ZodType>(
         }),
       );
     } catch (err) {
+      // Tope de gasto alcanzado: no hubo llamada al proveedor, no se registra uso inexistente.
+      if (err instanceof AIProviderError && err.code === "AI_SPEND_LIMIT") throw err;
       const status = err instanceof AIProviderError && err.code === "TIMEOUT" ? "TIMEOUT" : "FAILED";
       await deps.onUsage({ provider: deps.provider.name, model: deps.provider.model, isSimulated: deps.provider.isSimulated, inputTokens: err instanceof AIProviderError ? err.usage?.inputTokens ?? 0 : 0, outputTokens: err instanceof AIProviderError ? err.usage?.outputTokens ?? 0 : 0, latencyMs: Date.now() - started, toolCalls: 0, status });
       throw err;

@@ -43,7 +43,12 @@ export function analysisRunHandler(deps: {
       await deps.evaluations.finalizeTechnicalError(payload.companyId, payload.runId, {
         actor: { kind: "SYSTEM", ref: "analysis-pipeline" },
         errorCode: `PIPELINE_${code}`,
-        reason: retryable ? `Reintentos agotados (${max}); reintento manual disponible` : "Fallo técnico permanente; reintento manual disponible",
+        reason:
+          err instanceof AIProviderError && err.code === "AI_SPEND_LIMIT"
+            ? err.message
+            : retryable
+              ? `Reintentos agotados (${max}); reintento manual disponible`
+              : "Fallo técnico permanente; reintento manual disponible",
       });
       helpers.logger.warn(`analysis_run: corrida ${payload.runId} cerrada en ERROR (${code})`);
     }

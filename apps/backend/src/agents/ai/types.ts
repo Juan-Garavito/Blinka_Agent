@@ -57,7 +57,7 @@ export interface AIProvider {
   generate(req: AIRequest): Promise<AIResponse>;
 }
 
-export type AIErrorCode = "TIMEOUT" | "RATE_LIMITED" | "UNAVAILABLE" | "AUTH" | "BAD_REQUEST" | "INVALID_DOCUMENT" | "INVALID_RESPONSE" | "BUDGET_EXCEEDED";
+export type AIErrorCode = "TIMEOUT" | "RATE_LIMITED" | "UNAVAILABLE" | "AUTH" | "BAD_REQUEST" | "INVALID_DOCUMENT" | "INVALID_RESPONSE" | "AI_SPEND_LIMIT";
 
 /** Error del proveedor con clasificación temporal/permanente para los reintentos por etapa. */
 export class AIProviderError extends Error {

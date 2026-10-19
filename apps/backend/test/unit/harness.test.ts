@@ -169,6 +169,12 @@ describe("adaptador Gemini (fetch simulado; NO verificado contra la API real)", 
     expect(r).toEqual({ kind: "final", json: { a: 1 }, usage: { inputTokens: 10, outputTokens: 5 } });
   });
 
+  it("tope de gasto de IA: no registra uso de una llamada que no ocurrió", async () => {
+    const usages: UsageRecord[] = [];
+    await expect(run(new FakeAIProvider([new AIProviderError("AI_SPEND_LIMIT", false, "tope")]), specialist(), usages)).rejects.toMatchObject({ code: "AI_SPEND_LIMIT" });
+    expect(usages).toHaveLength(0);
+  });
+
   it("paso final con historial de herramientas: declara tools, prohíbe llamadas (NONE) y exige JSON", async () => {
     const f = ok({ candidates: [{ content: { parts: [{ text: '{"a":1}' }] } }] });
     await new GeminiProvider({ apiKey: "k-ficticia-123", model: "gemini-4-argon" }, f).generate({ ...req(1), final: true });

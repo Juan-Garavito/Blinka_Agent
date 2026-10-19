@@ -17,7 +17,7 @@ describe("tope duro por proceso para IA real", () => {
     await b.generate(req);
     const err = await b.generate(req).catch((e: unknown) => e);
     expect(err).toBeInstanceOf(AIProviderError);
-    expect(err).toMatchObject({ code: "BUDGET_EXCEEDED", retryable: false });
+    expect(err).toMatchObject({ code: "AI_SPEND_LIMIT", retryable: false });
     expect(p.calls).toBe(2);
   });
   it("corta por coste estimado acumulado con los precios del perfil (decimal)", async () => {
@@ -26,7 +26,7 @@ describe("tope duro por proceso para IA real", () => {
     await b.generate(req);
     expect(b.spent).toEqual({ requests: 1, estimatedCostUsd: "0.07000000" });
     await b.generate(req); // 0.14 ≥ 0.10 tras la segunda
-    await expect(b.generate(req)).rejects.toMatchObject({ code: "BUDGET_EXCEEDED" });
+    await expect(b.generate(req)).rejects.toMatchObject({ code: "AI_SPEND_LIMIT" });
     expect(p.calls).toBe(2);
   });
   it("cuenta el uso conocido de llamadas fallidas", async () => {
