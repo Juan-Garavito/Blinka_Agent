@@ -85,4 +85,37 @@ describe("Endpoints de solo lectura para el frontend", () => {
     expect((await c.get("/api/audit-events?actorKind=SYSTEM")).body.events.every((e: { actorKind: string }) => e.actorKind === "SYSTEM")).toBe(true);
     expect((await c.get("/api/ai-usage")).body).toMatchObject({ usage: [], limit: 50 });
   });
+
+  it("GET /api/ai-usage/summary totaliza coste exacto por modelo, etapa, día y factura; aislado por empresa y filtrable por fecha", async () => {
+    const { rows } = await db.pool.query<{ id: string }>(
+      "select r.id from evaluation_runs r join evaluation_flows f on f.id = r.flow_id where f.invoice_id = $1 limit 1",
+      [authorized],
+    );
+    const runId = rows[0]!.id;
+    const insert = (companyId: string, run: string | null, provider: string, cost: string, simulated: boolean) =>
+      db.pool.query(
+        `insert into ai_usage_logs (company_id, evaluation_run_id, task_type, provider, model, input_tokens, output_tokens, estimated_cost_usd, status, latency_ms, is_simulated)
+         values ($1, $2, 'INVOICE_EXTRACTION', $3, $4, 1000, 500, $5, 'SUCCEEDED', 10, $6)`,
+        [companyId, run, provider, simulated ? "fake-extractor-v1" : "gemini-4-argon", cost, simulated],
+      );
+    await insert(c.company.id, runId, "GEMINI", "0.01000000", false);
+    await insert(c.company.id, runId, "GEMINI", "0.02000001", false);
+    await insert(c.company.id, null, "FAKE (MOCK)", "0", true);
+    await insert(other.company.id, null, "GEMINI", "5.00000000", false);
+
+    const sum = (await c.get("/api/ai-usage/summary")).body;
+    const real = sum.totals.find((t: { isSimulated: boolean }) => !t.isSimulated);
+    expect(real).toMatchObject({ calls: 2, analyses: 1, inputTokens: 2000, outputTokens: 1000, estimatedCostUsd: "0.03000001" });
+    expect(sum.totals.find((t: { isSimulated: boolean }) => t.isSimulated)).toMatchObject({ calls: 1, estimatedCostUsd: "0.00000000" });
+    expect(sum.byInvoice).toEqual([expect.objectContaining({ invoiceId: authorized, supplierInvoiceNumber: "ALFA-777", analyses: 1, calls: 2, estimatedCostUsd: "0.03000001" })]);
+    expect(sum.byStage).toEqual([expect.objectContaining({ stage: "INVOICE_EXTRACTION", calls: 2, estimatedCostUsd: "0.03000001" })]);
+    expect(sum.byDay).toHaveLength(1);
+    expect(sum.byModel.map((m: { model: string }) => m.model)).toEqual(["gemini-4-argon", "fake-extractor-v1"]);
+    expect(sum.pricing).toMatchObject({ simulated: true });
+    // Otra empresa no ve estos datos ni los suyos se mezclan.
+    expect((await other.get("/api/ai-usage/summary")).body.totals).toEqual([expect.objectContaining({ calls: 1, estimatedCostUsd: "5.00000000" })]);
+    // Filtro por fecha (local de la empresa) y validación.
+    expect((await c.get("/api/ai-usage/summary?from=2999-01-01")).body.totals).toEqual([]);
+    expect((await c.get("/api/ai-usage/summary?from=hoy")).status).toBe(400);
+  });
 });

@@ -126,7 +126,9 @@ export function createApiRouter({ env, db, logger, storage, fxProvider, aiProvid
   scoped.use(policiesRouter(createPoliciesService(db.db)));
   scoped.use(budgetsRouter(createBudgetsService(db.db)));
   scoped.use(evaluationsRouter(core.evaluations));
-  scoped.use(auditRouter(db.db));
+  scoped.use(
+    auditRouter(db.db, { provider: aiProvider.name, model: aiProvider.model, simulated: aiProvider.isSimulated, inputUsdPerMTok: env.AI_PRICE_INPUT_USD_PER_MTOK, outputUsdPerMTok: env.AI_PRICE_OUTPUT_USD_PER_MTOK }),
+  );
   scoped.use(systemRouter({ aiProvider, fxProvider, storage }));
   scoped.use(dashboardRouter(db.db));
   scoped.use(approvalsRouter(createApprovalsService({ db: db.db, evaluations: core.evaluations })));

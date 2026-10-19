@@ -219,6 +219,17 @@ export const openApiDocument = {
     "/api/evaluation-runs/{id}/evidence": { get: op({ summary: "Evidencias verificadas (página/posición) y contratos examinados de una corrida", tag: "Evaluaciones", params: [idParam()] }) },
     "/api/documents/{id}/text": { get: op({ summary: "Capa de texto del documento (para resaltar evidencias)", tag: "Documentos", params: [idParam()] }) },
     "/api/ai-usage": { get: op({ summary: "Consumo de IA por llamada (sin prompts); isSimulated = MOCK", tag: "Auditoría", params: [{ name: "evaluationRunId", in: "query", schema: uuid }] }) },
+    "/api/ai-usage/summary": {
+      get: op({
+        summary: "Totalizado del coste estimado de IA: real/simulado, por modelo, etapa, día y factura (RF-30)",
+        tag: "Auditoría",
+        params: [
+          { name: "from", in: "query", schema: { type: "string", format: "date" } },
+          { name: "to", in: "query", schema: { type: "string", format: "date" } },
+          { name: "top", in: "query", schema: { type: "integer", minimum: 1, maximum: 100 } },
+        ],
+      }),
+    },
     "/api/audit-events": {
       get: op({
         summary: "Auditoría append-only",
