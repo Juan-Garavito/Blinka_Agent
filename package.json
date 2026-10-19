@@ -39,6 +39,8 @@
     "storage:prepare": "npm run storage:prepare -w @blinka/backend --",
     "db:prepare:supabase": "npm run db:prepare:supabase -w @blinka/backend --",
     "verify:mock": "node scripts/verify-mock.mjs",
+    "start:cloud": "npm run build && node scripts/start-cloud.mjs",
+    "start:cloud:check": "node scripts/start-cloud.mjs --check",
     "analyze:batch": "npm run analyze:batch -w @blinka/backend --"
   },
   "devDependencies": {
