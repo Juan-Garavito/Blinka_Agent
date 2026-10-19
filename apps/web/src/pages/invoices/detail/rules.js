@@ -53,6 +53,16 @@ export const RULE_LABELS = {
   INCOMPLETE_EVALUATION: "Evaluación incompleta",
   ALL_CHECKS_PASSED: "Todas las verificaciones superadas",
   APPROVAL_REQUIRED: "Aprobación requerida",
+  TECHNICAL_FAILURE: "Falla técnica del análisis",
+  // Tope de gasto de IA del worker (control de coste), NO el presupuesto financiero de la factura.
+  PIPELINE_AI_SPEND_LIMIT: "Tope de gasto de IA del proceso alcanzado",
+  PIPELINE_BUDGET_EXCEEDED: "Tope de gasto de IA del proceso alcanzado",
+  PIPELINE_TIMEOUT: "Tiempo de análisis agotado",
+  PIPELINE_RATE_LIMITED: "Límite de tasa del proveedor de IA",
+  PIPELINE_UNAVAILABLE: "Proveedor de IA no disponible",
+  PIPELINE_INVALID_RESPONSE: "Respuesta de IA inválida",
+  PIPELINE_INVALID_OUTPUT: "Salida de IA fuera de esquema",
+  PIPELINE_STALE_RUN: "Análisis atascado recuperado",
 };
 
 export const FIELD_LABELS = {
@@ -91,6 +101,7 @@ export function evidenceFieldOfRule(code) {
 
 export function ruleLabel(code) {
   if (RULE_LABELS[code]) return RULE_LABELS[code];
+  if (code?.startsWith("PIPELINE_")) return `Error técnico del análisis (${code.slice(9)})`;
   const f = evidenceFieldOfRule(code);
   if (f) return `Evidencia · ${fieldLabel(f)}`;
   return code;

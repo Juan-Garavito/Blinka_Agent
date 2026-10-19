@@ -32,6 +32,11 @@ describe("campos y reglas", () => {
     expect(fieldLabel("lines[2].quantity")).toBe("Línea 2 · cantidad");
     expect(ruleLabel("EVIDENCE_SUPPLIER_INVOICE_NUMBER")).toBe("Evidencia · Número de factura");
     expect(ruleLabel("UNKNOWN_RULE_X")).toBe("UNKNOWN_RULE_X");
+    // El tope de gasto de IA no se confunde con el presupuesto financiero (BUDGET_GLOBAL/BUDGET_CATEGORY).
+    expect(ruleLabel("PIPELINE_AI_SPEND_LIMIT")).toBe("Tope de gasto de IA del proceso alcanzado");
+    expect(ruleLabel("PIPELINE_BUDGET_EXCEEDED")).toBe("Tope de gasto de IA del proceso alcanzado");
+    expect(ruleLabel("PIPELINE_FOO")).toBe("Error técnico del análisis (FOO)");
+    expect(ruleLabel("BUDGET_CATEGORY")).toBe("Presupuesto de la categoría");
   });
   it("valor de la versión evaluada para cada campo", () => {
     const v = { originalCurrency: "USD", totalAmount: "300.0000", paymentDestinationRaw: "Transferir a X", lines: [{ lineNo: 1, unitPrice: "30.000000" }] };
