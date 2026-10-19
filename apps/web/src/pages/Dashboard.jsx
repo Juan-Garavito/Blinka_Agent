@@ -49,6 +49,9 @@ export default function Dashboard() {
         title="Centro de operaciones"
         actions={
           <>
+            <ButtonLink to="/business" variant="ghost">
+              Negocio y ROI
+            </ButtonLink>
             <ButtonLink to="/invoices" variant="secondary">
               Ver facturas
             </ButtonLink>

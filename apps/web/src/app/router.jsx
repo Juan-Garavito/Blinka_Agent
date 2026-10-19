@@ -50,6 +50,7 @@ export const routes = [
               { path: "invoices/new", element: page(() => import("../pages/invoices/InvoiceNew.jsx")) },
               { path: "invoices/:id/*", element: page(() => import("../pages/invoices/InvoiceDetail.jsx")) },
               { path: "approvals", element: page(() => import("../pages/Approvals.jsx")) },
+              { path: "business", element: page(() => import("../pages/Business.jsx")) },
               { path: "vendors", element: page(() => import("../pages/vendors/VendorList.jsx")) },
               { path: "vendors/:id", element: page(() => import("../pages/vendors/VendorDetail.jsx")) },
               { path: "contracts", element: page(() => import("../pages/contracts/ContractList.jsx")) },

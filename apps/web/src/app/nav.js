@@ -7,6 +7,7 @@ export const NAV_GROUPS = [
       { to: "/", label: "Centro de operaciones", end: true },
       { to: "/invoices", label: "Facturas" },
       { to: "/approvals", label: "Aprobaciones" },
+      { to: "/business", label: "Negocio y ROI" },
     ],
   },
   {
