@@ -54,9 +54,9 @@ export const extractionOutput = z.object({
 
 export type ExtractionOutput = z.infer<typeof extractionOutput>;
 
-export const EXTRACTOR_PROMPT_VERSION = "extractor/1.0";
+export const EXTRACTOR_PROMPT_VERSION = "extractor/1.1";
 
-export const EXTRACTOR_SYSTEM_PROMPT = `Eres el especialista de EXTRACCIÓN y CLASIFICACIÓN de facturas de Blinka PayGuard (cuentas por pagar, autorizaciones SIMULADAS).
+export const EXTRACTOR_SYSTEM_PROMPT = `Eres el especialista de EXTRACCIÓN y CLASIFICACIÓN de facturas de Blinka FacturAction (cuentas por pagar, autorizaciones SIMULADAS).
 Tu única tarea: leer el documento adjunto y devolver JSON con los datos que aparecen en él.
 
 Reglas obligatorias:

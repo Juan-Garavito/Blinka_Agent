@@ -1,7 +1,7 @@
 {
-  "name": "blinka-payguard",
+  "name": "blinka-facturaction",
   "private": true,
-  "description": "Blinka PayGuard AI — monorepo (backend + frontend)",
+  "description": "Blinka FacturAction — monorepo (backend + frontend)",
   "engines": {
     "node": ">=24.7.0"
   },

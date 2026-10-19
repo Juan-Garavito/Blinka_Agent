@@ -1,6 +1,6 @@
 # Imagen única del backend para los procesos api y worker (Railway / Compose).
 # Contexto de build: RAÍZ del monorepo (lockfile y workspaces viven allí).
-#   docker build -f apps/backend/Dockerfile -t blinka-payguard-backend .
+#   docker build -f apps/backend/Dockerfile -t blinka-facturaction-backend .
 FROM node:24-bookworm-slim AS web-build
 WORKDIR /app
 COPY package.json package-lock.json ./

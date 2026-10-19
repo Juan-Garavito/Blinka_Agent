@@ -2,7 +2,7 @@
   "name": "@blinka/web",
   "version": "0.1.0",
   "private": true,
-  "description": "Blinka PayGuard AI — frontend (React + Vite + JavaScript)",
+  "description": "Blinka FacturAction — frontend (React + Vite + JavaScript)",
   "type": "module",
   "engines": {
     "node": ">=24.7.0"

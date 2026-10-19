@@ -1,6 +1,6 @@
 # @blinka/web
 
-Frontend React + Vite + JavaScript de Blinka PayGuard AI. Ejecutar comandos desde la raíz.
+Frontend React + Vite + JavaScript de Blinka FacturAction. Ejecutar comandos desde la raíz.
 
 - `npm run dev:web`: http://localhost:5173; proxy same-origin a la API local :4000.
 - `npm run build`: compila backend y frontend. La API sirve `apps/web/dist` si existe.

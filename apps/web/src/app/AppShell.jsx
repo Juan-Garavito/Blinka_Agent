@@ -8,14 +8,14 @@ import styles from "./AppShell.module.css";
 
 export function Brand() {
   return (
-    <Link to="/" className={styles.brand} aria-label="Blinka PayGuard AI — Centro de operaciones">
+    <Link to="/" className={styles.brand} aria-label="Blinka FacturAction — Centro de operaciones">
       <svg width="26" height="26" viewBox="0 0 32 32" aria-hidden>
         <rect width="32" height="32" rx="6" fill="#153454" />
         <path d="M9 8h8.5a5 5 0 0 1 1.6 9.7A5.2 5.2 0 0 1 17.8 26H9z" fill="none" stroke="#fff" strokeWidth="2.4" strokeLinejoin="round" />
         <circle cx="23.5" cy="9" r="2.2" fill="#D6A357" />
       </svg>
       <span className={styles.brandText}>
-        Blinka <span>PayGuard</span>
+        Blinka <span>FacturAction</span>
       </span>
     </Link>
   );

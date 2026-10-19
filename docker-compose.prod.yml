@@ -43,7 +43,7 @@ services:
     build:
       context: .
       dockerfile: apps/backend/Dockerfile
-    image: blinka-payguard-backend:prod
+    image: blinka-facturaction-backend:prod
     command: ["node", "dist/server.js"]
     env_file: *env-files
     environment: *prod-env
@@ -58,7 +58,7 @@ services:
     restart: unless-stopped
 
   worker:
-    image: blinka-payguard-backend:prod
+    image: blinka-facturaction-backend:prod
     pull_policy: never
     command: ["node", "dist/worker.js"]
     env_file: *env-files

@@ -55,7 +55,7 @@ export default function Login() {
           <h1 className={styles.title}>Cada factura, contrastada con su contrato, sus políticas y su presupuesto antes de autorizarse.</h1>
           <p className={styles.lead}>Un motor determinista decide. La IA solo extrae y documenta evidencia verificable.</p>
         </div>
-        <p className={styles.foot}>Hackatón 30X · Blinka PayGuard AI</p>
+        <p className={styles.foot}>Hackatón 30X · Reto Blinka · Blinka FacturAction</p>
       </section>
       <section className={styles.panel}>
         <form className={styles.form} onSubmit={onSubmit} noValidate>

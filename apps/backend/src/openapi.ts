@@ -47,7 +47,7 @@ const statusChange: Schema = { type: "object", required: ["status", "reason"], p
 export const openApiDocument = {
   openapi: "3.1.0",
   info: {
-    title: "Blinka PayGuard AI — API backend P0 (PROVISIONAL)",
+    title: "Blinka FacturAction — API backend P0 (PROVISIONAL)",
     version: "0.1.0",
     description:
       "Autorizaciones y reservas SIMULADAS (sin pagos reales). Contrato provisional sujeto a ajustes UX. Aprobadores = personas SIMULADAS. Proveedor IA local = FAKE (MOCK) salvo configuración de Gemini.",

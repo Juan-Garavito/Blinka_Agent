@@ -1,4 +1,4 @@
-# @blinka/backend — Blinka PayGuard AI
+# @blinka/backend — Blinka FacturAction
 
 Backend MVP **P0** del monorepo (ver [README raíz](../../README.md)): monolito modular **Node.js + Express 5 +
 TypeScript** con **PostgreSQL / Drizzle**, **Zod**, **Graphile Worker** y **LangGraph.js**. Un mismo código produce

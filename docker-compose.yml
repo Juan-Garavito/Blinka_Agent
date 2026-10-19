@@ -2,6 +2,8 @@
 # - postgres: siempre (npm run db:up)
 # - perfil "app": migrate → api + worker del backend en contenedores (npm run docker:up)
 # La API sirve el build del frontend desde el mismo origen.
+# Nombre técnico del proyecto Compose: se conserva (antes Blinka PayGuard) para no perder el volumen local
+# de datos (blinka-payguard_pgdata) ni chocar con el contenedor de PostgreSQL existente.
 name: blinka-payguard
 
 services:
@@ -30,7 +32,7 @@ services:
     build:
       context: .
       dockerfile: apps/backend/Dockerfile
-    image: blinka-payguard-backend:local
+    image: blinka-facturaction-backend:local
     command: ["node", "dist/shared/db/migrate.js"]
     # Secretos LOCALES (ACCOUNT_FINGERPRINT_SECRET…) desde el .env ignorado por Git;
     # las claves de `environment` prevalecen sobre las del archivo.
@@ -58,7 +60,7 @@ services:
 
   api:
     profiles: ["app"]
-    image: blinka-payguard-backend:local
+    image: blinka-facturaction-backend:local
     pull_policy: never
     command: ["node", "dist/server.js"]
     env_file:
@@ -77,7 +79,7 @@ services:
 
   worker:
     profiles: ["app"]
-    image: blinka-payguard-backend:local
+    image: blinka-facturaction-backend:local
     pull_policy: never
     command: ["node", "dist/worker.js"]
     env_file:
