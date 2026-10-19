@@ -4,7 +4,7 @@ Fecha: 18-10-2026. Hackathon 30X. Agente B2B de cuentas por pagar con **autoriza
 
 **Estado general:** primera versión **completa y verificada en local** (backend, worker con agentes, frontend). **Gemini 4 Argon verificado con llamadas reales**. **Supabase aprovisionado** (estructura, rol runtime, RLS, bucket privado y datos ficticios de demo; ejecutado por el usuario y verificado en solo lectura). Pendiente: arrancar API/worker contra Supabase. Sin despliegue y sin commits.
 
-Informes de detalle: [Backend](REPORTE_BACKEND_P0.md) · [Hardening](REPORTE_P0_HARDENING.md) · [Frontend](REPORTE_FRONTEND_P0.md) · [Integración Gemini/Supabase](REPORTE_P0_INTEGRATION_GEMINI_SUPABASE.md) · [Runbook](RUNBOOK.md) · [Decisiones D-001…D-064](DECISIONS.md) · [Registro](execution-log.md)
+Informes de detalle: [Backend](REPORTE_BACKEND_P0.md) · [Hardening](REPORTE_P0_HARDENING.md) · [Frontend](REPORTE_FRONTEND_P0.md) · [Integración Gemini/Supabase](REPORTE_P0_INTEGRATION_GEMINI_SUPABASE.md) · [P1 Negocio y ROI](REPORTE_P1_NEGOCIO_ROI.md) · [Runbook](RUNBOOK.md) · [Decisiones D-001…D-064](DECISIONS.md) · [Registro](execution-log.md)
 
 ## 1. Qué hace el producto
 
@@ -13,6 +13,7 @@ Informes de detalle: [Backend](REPORTE_BACKEND_P0.md) · [Hardening](REPORTE_P0_
 3. Cada dato usado para decidir se **coteja con el texto real del documento** (página y posición); si no aparece → corrección; sin texto (escaneo) → confirmación humana auditada.
 4. Resultado visible: **Autorizada** (con reserva simulada del presupuesto global y de categoría), **En aprobación** (persona aprobadora simulada), **En corrección**, **Bloqueada**, **Rechazada** o **Error técnico**.
 5. Todo queda en auditoría append-only; el uso de IA en `ai_usage_logs` con coste estimado.
+6. **Negocio y ROI:** volumen autorizado, automatización, importe frenado, coste de IA por análisis y ahorro/ROI hipotético con supuestos editables; cada cifra explica su definición, denominador y fuente.
 
 ## 2. Paquetes entregados
 
@@ -27,6 +28,7 @@ Informes de detalle: [Backend](REPORTE_BACKEND_P0.md) · [Hardening](REPORTE_P0_
 | B6 Integración | Dashboard, OpenAPI (48 rutas), demo A–O, Docker/Railway/CI preparados | DONE (sin despliegue) |
 | P0-HARDENING | Evidencia verificada en texto, tope acumulado de horas, Frankfurter v2 (COP), recuperación automática | DONE |
 | FE0–FE5 | React 19 + Vite: Dashboard, facturas, carga con proveedor obligatorio, progreso real, Evidence Studio, gestión, auditoría, responsive | DONE |
+| **P1 Negocio y ROI** | Dashboard de negocio (RF-23), coste de IA y estimación unitaria (RF-30), ROI con supuestos explícitos; resumen de coste en Auditoría | **DONE** ([reporte](REPORTE_P1_NEGOCIO_ROI.md)) |
 | P0-INTEGRATION | Gemini 4 Argon real; Supabase aprovisionado (migraciones, rol, RLS, bucket, seed demo) | Gemini DONE · Supabase aprovisionado (procesos remotos pendientes) |
 
 ## 3. Real frente a simulado
@@ -47,8 +49,8 @@ Informes de detalle: [Backend](REPORTE_BACKEND_P0.md) · [Hardening](REPORTE_P0_
 | Prueba | Resultado |
 |---|---|
 | Lint / typecheck / build (raíz) | OK |
-| Backend (Vitest, unitarias + integración con PostgreSQL y Graphile reales) | **271/271** |
-| Frontend (Vitest + Testing Library) | **28/28** |
+| Backend (Vitest, unitarias + integración con PostgreSQL y Graphile reales) | **274/274** |
+| Frontend (Vitest + Testing Library) | **29/29** |
 | E2E Playwright contra backend real (desktop, tableta, móvil) | 9/9 en la verificación FE5; recorrido prioritario y capturas reconfirmados después |
 | Externas reales | Frankfurter v2 3/3; Gemini 4 Argon `REAL_VERIFIED` 3/3 |
 | Auditoría npm | Runtime 0 vulnerabilidades; 4 moderadas en tooling de desarrollo |
@@ -109,6 +111,7 @@ REMOTE_DB_CONFIRM=aws-0-us-east-1.pooler.supabase.com/postgres npm run start:clo
 2. Completar la prueba con Gemini desde la interfaz sobre Supabase y medir el gasto total (`ai:cost:supabase`); hasta ahora US$0.086 en Supabase, ≈ US$0.038 por análisis completo.
 3. Despliegue (Railway u otro) y dominio común frontend/API (la cookie `SameSite=Strict` lo exige).
 4. Mejora de coste: cada factura necesitó una llamada de reparación de esquema (~30 % extra).
+4b. P1 restante: segunda empresa en la demo (RF-20), notificaciones simuladas (RF-22), recepción por correo/chat (RF-24), anulaciones con liberación de reserva.
 5. Escenario O del seed antiguo con PNG inválido; edición de empresa sin endpoint.
 6. Calidad de IA no evaluada con documentos reales ni escaneados; auditoría exhaustiva de accesibilidad pendiente.
 7. Historial Git: sin commits todavía; plan de commits en preparación.

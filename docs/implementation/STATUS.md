@@ -58,3 +58,6 @@ Actualización P0 integración 18-10-2026: autenticación Supabase y vínculo bl
 - **Supabase:** CLI autenticada y proyecto `gagbmadasmzqsvbkxlmx` vinculado y sano; **falta `.env.supabase`** → el backend no se conecta; migraciones/rol/bucket sin ejecutar.
 - Regresión: lint/typecheck/build OK; backend 261/261; frontend 28/28.
 - **Revisión 2 (15:40):** coste Gemini corregido (smoke final 0.096422 USD; total Argon 0.191832 USD). `.env.supabase` preparado (Session pooler, verify-full, roles separados; secretos pendientes del usuario). Preflight BLOCKED por credenciales pendientes, sin conectar. Prueba UI con Gemini preparada con tope duro (4 solicitudes / 0.06 USD), **pendiente de autorización**. Backend 269/269, frontend 28/28.
+
+### P1 Negocio y ROI — 18-10-2026 · DONE (local)
+RF-23 (dashboard de negocio con definición/denominador/fuente por indicador), RF-30 (coste de IA y estimación unitaria, separado del ahorro hipotético) y ROI con supuestos editables. Endpoints `GET /api/business-metrics` y `GET /api/ai-usage/summary`; vista Operaciones → Negocio y ROI; panel «Coste de IA» en Auditoría. Backend 274/274, frontend 29/29. Reporte: [REPORTE_P1_NEGOCIO_ROI.md](REPORTE_P1_NEGOCIO_ROI.md). P1 pendiente: RF-20 (2ª empresa en demo), RF-22, RF-24, anulaciones.
