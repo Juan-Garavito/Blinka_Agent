@@ -62,7 +62,7 @@ Informes de detalle: [Backend](REPORTE_BACKEND_P0.md) · [Hardening](REPORTE_P0_
 | Total inconsistente | En corrección (TOTAL_ARITHMETIC) | 0 | 13/13 |
 | Instrucción hostil en el documento | Autorizada (instrucción ignorada) | 1 | 13/13 |
 
-Coste estimado de lista (2.00 / 10.00 USD por millón, salida incluye pensamiento): smoke final **0.096422 USD** (17 606 / 6 121 tokens); total de la integración con Argon **0.191832 USD** + ≈0.0085 de diagnóstico. Coste real de facturación no disponible por API. Correcciones clave: esquema JSON compatible con Gemini, paso final con herramientas en modo NONE, disponibilidad por `models.get`, precios por modelo, plazo de 120 s y **tope duro por proceso** (`BudgetedAIProvider`).
+Coste estimado de lista (2.00 / 10.00 USD por millón, salida incluye pensamiento): smoke final **0.096422 USD** (17 606 / 6 121 tokens); total de la integración con Argon **0.191832 USD** + ≈0.0085 de diagnóstico. Coste real de facturación no disponible por API. Correcciones clave: esquema JSON compatible con Gemini, paso final con herramientas en modo NONE, disponibilidad por `models.get`, precios por modelo, plazo de 120 s y **tope opcional por proceso** (`BudgetedAIProvider`, hoy desactivado: el gasto se mide con `npm run ai:cost` / `ai:cost:supabase` y el panel del Dashboard).
 
 ## 6. Supabase
 
@@ -96,10 +96,17 @@ npm run dev:web        # :5173 (proxy same-origin a la API)
 
 Producción same-origin: `npm run build` y la API sirve el frontend compilado (ver RUNBOOK).
 
+App completa con Supabase + Gemini real, como en producción (excepto `NODE_ENV`, por `http://localhost`):
+
+```bash
+npm run start:cloud:check
+REMOTE_DB_CONFIRM=aws-0-us-east-1.pooler.supabase.com/postgres npm run start:cloud   # http://localhost:4003
+```
+
 ## 8. Pendientes y límites conocidos
 
 1. Arrancar API/worker contra Supabase con el rol `blinka_runtime` y probar login, carga y análisis (FAKE primero).
-2. Prueba de una factura desde la interfaz con el worker Gemini real (presupuesto propuesto: ≤4 llamadas, ≤0.06 USD), pendiente de autorización.
+2. Completar la prueba con Gemini desde la interfaz sobre Supabase y medir el gasto total (`ai:cost:supabase`); hasta ahora US$0.086 en Supabase, ≈ US$0.038 por análisis completo.
 3. Despliegue (Railway u otro) y dominio común frontend/API (la cookie `SameSite=Strict` lo exige).
 4. Mejora de coste: cada factura necesitó una llamada de reparación de esquema (~30 % extra).
 5. Escenario O del seed antiguo con PNG inválido; edición de empresa sin endpoint.

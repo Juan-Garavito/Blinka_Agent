@@ -224,3 +224,48 @@ verify:mock crea una base LOCAL aislada terminada en _test, aplica migraciones/s
 arranca API/worker en :4002 y fuerza FAKE/FIXTURE. Cierra esos procesos y conserva la base local.
 La auditoría pública muestra tres señuelos ficticios de credenciales en tests como avisos de revisión;
 ver informe. No añadir tokens CLI, perfiles reales, certificados privados ni documentos empresariales a Git.
+
+## 8. App completa en este equipo «como en producción» (Supabase + Gemini)
+
+Perfiles: `.env` (base local, IA FAKE) + `.env.supabase` (BD/Storage Supabase) + `.env.gemini` (Gemini real con tope duro por proceso). El lanzador compila, arranca API (sirve el frontend) y worker como procesos separados, con TLS verify-full, cookies `Secure`, logs JSON y FX real (Frankfurter v2). Única diferencia con un despliegue: `NODE_ENV=development`, porque el origen es `http://localhost` (producción exige `https://`).
+
+```bash
+npm run start:cloud:check     # valida la configuración, sin conectar a nada
+REMOTE_DB_CONFIRM=aws-0-us-east-1.pooler.supabase.com/postgres npm run start:cloud
+# → http://localhost:4003 (usar Chrome/Firefox: aceptan cookies Secure en localhost). Ctrl+C detiene ambos procesos.
+```
+
+Gemini **sin tope de gasto por proceso** (decisión del usuario: medir el gasto completando todo el proceso). Un análisis completo ≈ 3 llamadas ≈ 0.038 USD. Ver el gasto: `npm run ai:cost:supabase -w @blinka/backend` (o `ai:cost` en local; `-- --since=YYYY-MM-DD`), panel «Uso de IA» del Dashboard y Auditoría → Uso de IA. Para una prueba sin gasto, sobrescribir `AI_PROVIDER=fake` en el comando.
+
+## 9. Producción con Docker Compose (Supabase + Gemini + HTTPS)
+
+`docker-compose.prod.yml`: `api` y `worker` (misma imagen, `NODE_ENV=production`) + `caddy` (HTTPS automático, `deploy/caddy/Caddyfile`). Sin PostgreSQL local ni migraciones (Supabase ya migrado). Los contenedores cargan SOLO `.env.supabase` + `.env.gemini` (`format: raw`); la CA de Supabase se monta en solo lectura; la imagen no contiene secretos y corre como usuario `node`.
+
+```bash
+# Prueba en este equipo (certificado de la CA interna de Caddy; el navegador avisará):
+REMOTE_DB_CONFIRM=aws-0-us-east-1.pooler.supabase.com/postgres npm run prod:up      # https://localhost
+npm run prod:logs
+npm run prod:down
+
+# Servidor con dominio (DNS apuntando al servidor, puertos 80/443 abiertos → Let's Encrypt):
+REMOTE_DB_CONFIRM=aws-0-us-east-1.pooler.supabase.com/postgres DOMAIN=blinka.midominio.com \
+  PUBLIC_ORIGIN=https://blinka.midominio.com npm run prod:up
+```
+
+Variables: `DOMAIN` (sitio de Caddy), `PUBLIC_ORIGIN` (debe coincidir exactamente con la URL del navegador; si `HTTPS_PORT` ≠ 443, incluir el puerto), `HTTP_PORT`/`HTTPS_PORT`. Pendiente de endurecimiento: los contenedores usan el rol `postgres` (decisión de demo) y reciben `MIGRATION_DATABASE_URL`; en producción real, `blinka_runtime` y perfil sin credenciales de aprovisionamiento.
+
+**Tope de gasto de IA (opcional, desactivado):** si se definen `AI_MAX_REQUESTS_PER_PROCESS` y `AI_MAX_COST_USD_PER_PROCESS` (juntos), cada worker se detiene al alcanzarlos y las facturas siguientes quedan en **Error técnico · `PIPELINE_AI_SPEND_LIMIT`** (antes `PIPELINE_BUDGET_EXCEEDED`): sin datos extraídos no hay decisión financiera posible. Hoy NO está configurado: el gasto se mide con `ai:cost`. No confundir con `BUDGET_GLOBAL`/`BUDGET_CATEGORY` (presupuesto financiero → **Bloqueada**). Siempre activos, por factura: `AI_MAX_STEPS`, `AI_MAX_TOTAL_TOKENS` y `AI_TIMEOUT_MS` del especialista, y 3 intentos de cola solo ante fallos transitorios.
+
+## 10. Análisis masivo encolado (`analyze:batch`)
+
+Encola por la API (misma ruta que la interfaz: sesión, CSRF, auditoría, cola Graphile), mantiene `--parallel` corridas en curso (la API admite 10 pendientes por empresa y 60 por hora; ante 429 espera 30 s y reintenta), sigue cada corrida hasta el resultado (máx. 6 min) y muestra la tabla y el **gasto de IA del lote** (diferencia de `ai_usage_logs`).
+
+```bash
+# Con la app en marcha (start:cloud → :4003, que es el valor por defecto)
+npm run analyze:batch -- --dry-run                         # qué analizaría (pendientes + error)
+npm run analyze:batch                                      # pendientes y en error
+npm run analyze:batch -- --select=all --parallel=5         # todas (reanaliza)
+npm run analyze:batch -- --api=http://127.0.0.1:4000 --select=correction --limit=10
+```
+
+`--select`: `pending` (sin evaluar), `error`, `correction`, `all`. El rendimiento real lo fija el worker: `WORKER_CONCURRENCY` (trabajos simultáneos, 2 por defecto) y `AI_MAX_CONCURRENCY` (llamadas a la IA simultáneas; 1 en `.env.gemini`). Con Gemini, ≈ 20–40 s y ≈ 0.038 USD por factura; para acelerar, subir ambos valores. Verificado con IA FAKE en local: 4 facturas en paralelo en 2 s con los resultados esperados; 0 USD.
