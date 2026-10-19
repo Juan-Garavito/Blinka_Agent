@@ -4,7 +4,7 @@ import { Button, EmptyState, ErrorPanel, PageHeader, Skeleton } from "../compone
 import { IconFlask } from "../components/icons.jsx";
 import { api } from "../lib/api.js";
 import { useResource } from "../lib/hooks.js";
-import { formatDateTime, formatDecimal, shortId } from "../lib/format.js";
+import { formatDate, formatDateTime, formatDecimal, shortId } from "../lib/format.js";
 import m from "./manage.module.css";
 import s from "./Audit.module.css";
 
@@ -158,6 +158,8 @@ function AiUsage() {
   };
   return (
     <>
+      <CostSummary />
+      <h2 className={s.h2}>Detalle por llamada</h2>
       {rows.some((u) => u.isSimulated) && (
         <p className={m.fine} style={{ marginBottom: 12 }}>
           <IconFlask size={14} /> Las filas marcadas como simuladas provienen del proveedor FAKE (MOCK): tokens estimados y costo 0; no se llamó a un modelo real.
@@ -224,5 +226,146 @@ function AiUsage() {
         </Button>
       </nav>
     </>
+  );
+}
+
+const STAGE_LABEL = { EXTRACT_CLASSIFY: "Extracción y clasificación", CONTRACT_MATCH: "Búsqueda de contrato", CONTRACT_VALIDATE: "Validación", FINANCIAL_DECISION: "Decisión", INVOICE_EXTRACTION: "Extracción de factura" };
+const usd = (v) => formatDecimal(v, { minFraction: 2, maxFraction: 6 });
+
+/** Totalizado del coste ESTIMADO de IA (RF-30): filtros de fecha en la URL, total, etapa, modelo, día y factura. */
+function CostSummary() {
+  const [params, setParams] = useSearchParams();
+  const from = params.get("from") ?? "";
+  const to = params.get("to") ?? "";
+  const qs = new URLSearchParams();
+  if (from) qs.set("from", from);
+  if (to) qs.set("to", to);
+  const sum = useResource(`/api/ai-usage/summary?${qs}`);
+  const setRange = (k, v) => {
+    const n = new URLSearchParams(params);
+    if (v) n.set(k, v);
+    else n.delete(k);
+    n.delete("page");
+    setParams(n);
+  };
+  const d = sum.data;
+  const real = d?.totals.find((t) => !t.isSimulated);
+  const sim = d?.totals.find((t) => t.isSimulated);
+
+  return (
+    <section className={s.summary} aria-labelledby="cost-h">
+      <div className={s.summaryHead}>
+        <h2 id="cost-h" className={s.h2}>
+          Coste de IA
+        </h2>
+        <div className={m.toolbar} style={{ margin: 0 }}>
+          <label className={m.ctl}>
+            <span>Desde</span>
+            <input type="date" value={from} onChange={(e) => setRange("from", e.target.value)} />
+          </label>
+          <label className={m.ctl}>
+            <span>Hasta</span>
+            <input type="date" value={to} onChange={(e) => setRange("to", e.target.value)} />
+          </label>
+        </div>
+      </div>
+      {sum.error ? (
+        <ErrorPanel error={sum.error} onRetry={sum.reload} />
+      ) : !d ? (
+        <Skeleton lines={3} />
+      ) : (
+        <>
+          <div className={s.kpis}>
+            <Kpi label="Coste estimado (IA real)" value={`${usd(real?.estimatedCostUsd ?? "0")} USD`} strong />
+            <Kpi label="Llamadas reales" value={real?.calls ?? 0} />
+            <Kpi label="Análisis con IA real" value={real?.analyses ?? 0} />
+            <Kpi label="Coste medio por análisis" value={`${usd(real?.averagePerAnalysisUsd ?? "0")} USD`} />
+            <Kpi label="Tokens (entrada / salida)" value={`${real?.inputTokens ?? 0} / ${real?.outputTokens ?? 0}`} />
+          </div>
+          <p className={m.fine}>
+            <IconFlask size={14} />
+            {d.pricing && !d.pricing.simulated
+              ? `Precio de referencia vigente: ${d.pricing.model} · ${d.pricing.inputUsdPerMTok} USD/1M entrada · ${d.pricing.outputUsdPerMTok} USD/1M salida (incluye pensamiento). `
+              : ""}
+            Coste estimado de lista, no la factura del proveedor.
+            {sim ? ` Llamadas simuladas (MOCK, coste 0): ${sim.calls}.` : ""}
+          </p>
+          {!real ? (
+            <EmptyState title="Sin consumo de IA real en el período">{sim ? "Solo hubo análisis con el proveedor simulado." : "Aún no hay análisis registrados."}</EmptyState>
+          ) : (
+            <div className={s.summaryGrid}>
+              <MiniTable
+                title="Por etapa del agente"
+                cols={["Etapa", "Llamadas", "Reintentos", "Coste USD", "Medio/análisis"]}
+                rows={d.byStage.map((r) => [STAGE_LABEL[r.stage] ?? r.stage, r.calls, r.retryCalls, usd(r.estimatedCostUsd), usd(r.averagePerAnalysisUsd)])}
+              />
+              <MiniTable
+                title="Por modelo y resultado"
+                cols={["Modelo", "Estado", "Llamadas", "Coste USD"]}
+                rows={d.byModel.filter((r) => !r.isSimulated).map((r) => [r.model, r.status, r.calls, usd(r.estimatedCostUsd)])}
+              />
+              <MiniTable title="Por día" cols={["Día", "Llamadas", "Coste USD"]} rows={d.byDay.map((r) => [formatDate(r.day), r.calls, usd(r.estimatedCostUsd)])} />
+              <MiniTable
+                title="Facturas con mayor coste"
+                cols={["Factura", "Análisis", "Llamadas", "Coste USD"]}
+                rows={d.byInvoice.map((r) => [
+                  <Link key={r.invoiceId} to={`/invoices/${r.invoiceId}/investigation`}>
+                    {r.supplierInvoiceNumber ?? shortId(r.invoiceId)}
+                  </Link>,
+                  r.analyses,
+                  r.calls,
+                  usd(r.estimatedCostUsd),
+                ])}
+              />
+            </div>
+          )}
+        </>
+      )}
+    </section>
+  );
+}
+
+function Kpi({ label, value, strong }) {
+  return (
+    <div className={s.kpi}>
+      <span>{label}</span>
+      <strong data-strong={strong || undefined}>{value}</strong>
+    </div>
+  );
+}
+
+function MiniTable({ title, cols, rows }) {
+  return (
+    <div>
+      <h3 className={s.h3}>{title}</h3>
+      {rows.length === 0 ? (
+        <p className="muted">Sin datos.</p>
+      ) : (
+        <div className="ledger-wrap">
+          <table className="ledger">
+            <thead>
+              <tr>
+                {cols.map((c, i) => (
+                  <th key={c} className={i === 0 ? undefined : "num"}>
+                    {c}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((r, i) => (
+                <tr key={i}>
+                  {r.map((v, j) => (
+                    <td key={j} className={j === 0 ? undefined : "num"}>
+                      {v}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
   );
 }
