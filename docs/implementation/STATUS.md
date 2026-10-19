@@ -61,3 +61,6 @@ Actualización P0 integración 18-10-2026: autenticación Supabase y vínculo bl
 
 ### P1 Negocio y ROI — 18-10-2026 · DONE (local)
 RF-23 (dashboard de negocio con definición/denominador/fuente por indicador), RF-30 (coste de IA y estimación unitaria, separado del ahorro hipotético) y ROI con supuestos editables. Endpoints `GET /api/business-metrics` y `GET /api/ai-usage/summary`; vista Operaciones → Negocio y ROI; panel «Coste de IA» en Auditoría. Backend 274/274, frontend 29/29. Reporte: [REPORTE_P1_NEGOCIO_ROI.md](REPORTE_P1_NEGOCIO_ROI.md). P1 pendiente: RF-20 (2ª empresa en demo), RF-22, RF-24, anulaciones.
+
+### Documentación pública — 18-10-2026 · DONE
+README de portada (parte no técnica, funcionalidades, real vs simulado, arquitectura con Mermaid, inicio rápido, hackatón), licencia MIT, guías `docs/guide/01–05` (producto, arquitectura, instalación, operación, seguridad) y 5 capturas en `docs/assets/` generadas desde una base local limpia (`blinka_readme`, demo con IA simulada) y, para Negocio y ROI, desde `blinka_dev` (coste real de los smokes de Gemini). Enlaces verificados; capturas revisadas: solo datos ficticios.
