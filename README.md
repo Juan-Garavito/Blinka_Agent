@@ -128,7 +128,7 @@ Detalle completo en [docs/guide/02-arquitectura.md](docs/guide/02-arquitectura.m
 Requisitos: **Node.js ≥ 24.7** y **Docker**. Todo con IA y tipo de cambio simulados.
 
 ```bash
-git clone <url-del-repositorio> Blinka_Agent && cd Blinka_Agent
+git clone https://github.com/Juan-Garavito/Blinka_Agent.git Blinka_Agent && cd Blinka_Agent
 npm ci
 cp apps/backend/.env.example apps/backend/.env
 #   → completa SEED_EVALUATOR_PASSWORD y ACCOUNT_FINGERPRINT_SECRET (openssl rand -base64 48)
@@ -186,7 +186,7 @@ Proyecto desarrollado para la **Hackaton 30X**, reto **Blinka: «Agentes que pag
 
 El producto se llamó *Blinka PayGuard AI* durante el desarrollo; las especificaciones de partida conservan ese nombre.
 
-**Autor:** juan_garavito · desarrollado con asistencia de [Claude Code](https://claude.com/claude-code).
+**Desarrollado por Juan Camilo Garavito**, potenciado por Claude Code y Codex para el código, y ChatGPT para la investigación y documentación.
 
 ## Licencia
 

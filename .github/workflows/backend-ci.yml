@@ -1,4 +1,4 @@
-# CI del backend (preparado como archivo; NO activado: el repositorio no se ha publicado).
+# CI: lint, tipos, compilación, pruebas y auditoría de dependencias en pushes a main y pull requests.
 name: backend-ci
 on:
   pull_request:
