@@ -38,7 +38,8 @@
     "security:public": "node scripts/audit-public.mjs",
     "storage:prepare": "npm run storage:prepare -w @blinka/backend --",
     "db:prepare:supabase": "npm run db:prepare:supabase -w @blinka/backend --",
-    "verify:mock": "node scripts/verify-mock.mjs"
+    "verify:mock": "node scripts/verify-mock.mjs",
+    "analyze:batch": "npm run analyze:batch -w @blinka/backend --"
   },
   "devDependencies": {
     "supabase": "2.121.0"
