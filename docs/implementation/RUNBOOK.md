@@ -1,4 +1,4 @@
-# Runbook — Blinka (backend + frontend) Blinka PayGuard AI (P0)
+# Runbook — Blinka FacturAction (backend + frontend, P0)
 
 Todos los comandos se ejecutan desde la **raíz** del monorepo. Autorizaciones y reservas son **simuladas**.
 

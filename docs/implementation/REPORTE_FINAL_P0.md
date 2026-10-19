@@ -1,4 +1,6 @@
-# Blinka PayGuard AI — Reporte final P0 (primera versión)
+# Blinka FacturAction — Reporte final P0 (primera versión)
+
+> El producto se llamó **Blinka PayGuard AI** durante el desarrollo; se renombró a **Blinka FacturAction** porque ya existía un producto con ese nombre. Las especificaciones de partida y los reportes históricos conservan el nombre original.
 
 Fecha: 18-10-2026. Hackathon 30X. Agente B2B de cuentas por pagar con **autorizaciones y reservas presupuestarias SIMULADAS** (nunca pagos reales).
 

@@ -1,4 +1,4 @@
-# Blinka PayGuard AI
+# Blinka FacturAction
 
 Monorepo del MVP de la hackatón 30X: agente de cuentas por pagar con **autorizaciones y reservas
 simuladas** (nunca pagos reales).
@@ -42,7 +42,7 @@ npm test               # pruebas de todos los workspaces (requiere db:up)
 | `db:generate`, `db:migrate`, `db:migrate:test` | Migraciones Drizzle del backend (ver guardia en su README) |
 | `db:seed`, `db:seed:demo`, `demo:run` | Seeds locales y ejecución de la demo |
 | `openapi:export` | Exporta el contrato provisional a `docs/api/openapi.json` |
-| `docker:build` | Construye la imagen `blinka-payguard-backend:local` |
+| `docker:build` | Construye la imagen `blinka-facturaction-backend:local` |
 | `docker:up` | Levanta postgres → migrate → api + worker en contenedores |
 | `docker:down` | Detiene y elimina los contenedores del proyecto (conserva el volumen de datos) |
 
@@ -52,11 +52,11 @@ Un script concreto de una app se ejecuta con `npm run <script> -w @blinka/backen
 
 | Imagen | Dockerfile | Contexto | Procesos |
 |---|---|---|---|
-| `blinka-payguard-backend` | `apps/backend/Dockerfile` | raíz del repo | `node dist/server.js` (api, por defecto) · `node dist/worker.js` (worker) |
+| `blinka-facturaction-backend` | `apps/backend/Dockerfile` | raíz del repo | `node dist/server.js` (api, por defecto) · `node dist/worker.js` (worker) |
 | *(web)* | *pendiente* | — | — |
 
 ```bash
-docker build -f apps/backend/Dockerfile -t blinka-payguard-backend .
+docker build -f apps/backend/Dockerfile -t blinka-facturaction-backend .
 ```
 
 Estado del backend P0 y evidencias: [`docs/implementation/REPORTE_BACKEND_P0.md`](docs/implementation/REPORTE_BACKEND_P0.md).

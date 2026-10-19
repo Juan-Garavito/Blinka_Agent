@@ -68,3 +68,7 @@
 | D-062 | Preflight usa conexión READ ONLY y TLS verify-full remoto. API makeWorkerUtils y worker comparten guardia remota por posible DDL Graphile; transaction pooler rechazado | No escribir esquema remoto al probar conectividad |
 | D-063 | Roles/RLS/bucket privados preparados con plan por defecto, --apply y confirmación exacta solo después de autorización humana; ninguna escritura remota ejecutada | Separar inspección de aprovisionamiento |
 | D-064 | Regresión E2E en base local aislada, FAKE/FIXTURE explícitos y navegador sin solicitudes externas; CI no genera capturas de interfaz | Preservar datos manuales y alcance de integración |
+
+## D-065 — Renombrado del producto a «Blinka FacturAction» (18-10-2026)
+
+**Decisión:** el producto pasa de «Blinka PayGuard AI» a **Blinka FacturAction** (ya existe un producto llamado PayGuard); el repositorio se llama `Blinka_Agent`. **Cambia** todo lo visible: interfaz (cabecera, login, título), título de la API/OpenAPI, descripciones de paquetes, prompt del extractor (versión `extractor/1.1`, para que la huella de reutilización atribuya cada extracción a su prompt), imagen Docker `blinka-facturaction-backend`, README, RUNBOOK y reporte final. **Se conserva:** el nombre técnico del proyecto Compose `blinka-payguard` (cambiarlo crearía un volumen nuevo y ocultaría la base local `blinka-payguard_pgdata`), los nombres de archivo de las especificaciones de partida y los reportes históricos, que documentan el trabajo con el nombre original.
